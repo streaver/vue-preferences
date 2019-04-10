@@ -1,0 +1,39 @@
+{
+  "name": "vue-preferences",
+  "version": "0.0.0",
+  "description": "The coolest and easiest way to manage your user's preferences through localStorage and no back-end calls at all.",
+  "main": "dist/index.js",
+  "umd:main": "dist/index.umd.js",
+  "module": "dist/index.mjs",
+  "source": "src/index.js",
+  "unpkg": "dist/index.umd.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/streaver/vue-preferences.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/streaver/vue-preferences/issues"
+  },
+  "homepage": "https://github.com/streaver/vue-preferences#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "babel-jest": "^24.7.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint": "^5.16.0",
+    "jest": "^24.7.1",
+    "microbundle": "^0.11.0",
+    "prettier": "1.16.4"
+  }
+}
