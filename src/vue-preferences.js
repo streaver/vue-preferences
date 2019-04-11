@@ -1,6 +1,6 @@
-const LOCAL_STORAGE_PREFIX = "vp";
+const DEFAULT_STORAGE_PREFIX = "vp";
 
-function buildKey(name, prefix = LOCAL_STORAGE_PREFIX) {
+function buildKey(name, prefix = DEFAULT_STORAGE_PREFIX) {
   return `${prefix}:${name}`;
 }
 
@@ -31,7 +31,6 @@ function setPreference(key, value) {
 }
 
 function preference(name, opts = {}) {
-  console.log(name);
   const key = buildKey(name);
 
   return {
@@ -57,4 +56,4 @@ function mapPreferences(preferences) {
   return res;
 }
 
-export { preference, mapPreferences };
+export { preference, mapPreferences, DEFAULT_STORAGE_PREFIX };
