@@ -2,6 +2,12 @@
   "name": "vue-preferences",
   "version": "0.1.0",
   "private": true,
+  "source": "src/vue-preferences.js",
+  "main": "dist/VuePreferences.common.js",
+  "module": "dist/VuePreferences.esm.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "vue-cli-service build --target lib --name VuePreferences src/vue-preferences.js",
     "lint": "vue-cli-service lint",
@@ -15,12 +21,13 @@
     "@vue/cli-plugin-eslint": "^3.5.0",
     "@vue/cli-plugin-unit-jest": "^3.5.0",
     "@vue/cli-service": "^3.5.0",
-    "@vue/eslint-config-prettier": "^4.0.1",
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0"
+    "eslint-plugin-vue": "^5.0.0",
+    "microbundle": "^0.11.0",
+    "vue-template-compiler": "^2.5.21"
   }
 }

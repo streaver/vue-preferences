@@ -30,7 +30,7 @@ function setPreference(key, value) {
   return value;
 }
 
-function preference(name, opts = {}) {
+export function preference(name, opts = {}) {
   const key = buildKey(name);
 
   return {
@@ -46,7 +46,7 @@ function preference(name, opts = {}) {
   };
 }
 
-function mapPreferences(preferences) {
+export function mapPreferences(preferences) {
   const res = {};
 
   normalizeMap(preferences).forEach(({ name, options }) => {
@@ -56,4 +56,12 @@ function mapPreferences(preferences) {
   return res;
 }
 
-export { preference, mapPreferences, DEFAULT_STORAGE_PREFIX };
+function install(Vue) {
+  Vue.prototype.$preferences = {
+    firstName: {
+      defaultValue: "Larry"
+    }
+  };
+}
+
+export default { install };
