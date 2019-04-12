@@ -1,4 +1,4 @@
-const DEFAULT_STORAGE_PREFIX = "vp";
+export const DEFAULT_STORAGE_PREFIX = 'vp';
 
 function buildKey(name, prefix = DEFAULT_STORAGE_PREFIX) {
   return `${prefix}:${name}`;
@@ -13,7 +13,7 @@ function normalizeMap(map) {
 function mergeOptionsFor(name, globalOptions, specificOptions) {
   let options = specificOptions;
 
-  if (typeof globalOptions === "object") {
+  if (typeof globalOptions === 'object') {
     options = { ...globalOptions[name], ...specificOptions };
   }
 
@@ -42,7 +42,7 @@ export function preference(name, opts = {}) {
 
     set(value) {
       return setPreference(key, value);
-    }
+    },
   };
 }
 
@@ -57,11 +57,7 @@ export function mapPreferences(preferences) {
 }
 
 function install(Vue) {
-  Vue.prototype.$preferences = {
-    firstName: {
-      defaultValue: "Larry"
-    }
-  };
+  Vue.prototype.$preferences = {};
 }
 
 export default { install };

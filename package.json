@@ -1,33 +1,29 @@
 {
   "name": "vue-preferences",
   "version": "0.1.0",
-  "private": true,
-  "source": "src/vue-preferences.js",
-  "main": "dist/VuePreferences.common.js",
-  "module": "dist/VuePreferences.esm.js",
+  "main": "dist/index.js",
+  "umd:main": "dist/index.umd.js",
+  "module": "dist/index.mjs",
+  "source": "src/index.js",
+  "unpkg": "dist/index.umd.js",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "vue-cli-service build --target lib --name VuePreferences src/vue-preferences.js",
-    "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
-  },
-  "dependencies": {
-    "core-js": "^2.6.5"
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "test": "jest"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.5.0",
-    "@vue/cli-plugin-eslint": "^3.5.0",
-    "@vue/cli-plugin-unit-jest": "^3.5.0",
-    "@vue/cli-service": "^3.5.0",
-    "@vue/test-utils": "1.0.0-beta.29",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.6.0",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "babel-jest": "^24.7.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "jest": "^24.7.1",
     "microbundle": "^0.11.0",
-    "vue-template-compiler": "^2.5.21"
+    "prettier": "1.16.4"
   }
 }
