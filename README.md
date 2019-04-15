@@ -131,6 +131,56 @@ Let's see how to do it:
   }
 ```
 
+### Retrieve & Store new values to your preferences
+
+This might look pretty familiar to you if you are used to `window.localStorage` API.
+
+
+#### Retrieve data
+
+If at some point you need to know what is in your `vue-preferences` property, you
+just need to call the `get` method and will have it.
+
+
+```js
+// suppose you defined the following preference for knowing the site's locale
+const locale = preference('locale', { defaultValue: 'en' });
+
+// obtains the value stored in localStorage under the key "locale" or returns default: "en"
+console.log('Current locale is:', locale.get());
+
+// prints "Current locale is: en"
+```
+
+> Have in mind that if you defined your vue-preference without a default value,
+and you haven't call the API to set any value, then the result of calling `get`
+will be `undefined`.
+
+#### Store data
+
+If you didn't defined the vue-preference as a computed property and instead as
+a regular variable, then it might happen that you want to handle it by your own.
+
+If that's the case, you don't have other alternative than using the API to set
+the new values (in fact you have another alternative: to change localStorage values
+with its API, but why would you do that? 🤭)
+
+How to do it?
+
+```js
+// suppose the same property than in the previous example
+const locale = preference('locale', { defaultValue: 'en' });
+
+locale.set('es');
+
+// obtains the value stored in localStorage under the key "locale" or returns default: "en"
+console.log('Current locale is:', locale.get());
+
+// prints "Current locale is: es"
+```
+
+> This time the result is `es` not `en`.
+
 ### Notes
 
 ⚡ Please note that the API for defining multiple preferences at the same time is
