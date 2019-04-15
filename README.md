@@ -3,6 +3,24 @@
 <p align="center">
   <img src="https://user-images.githubusercontent.com/11605133/56131403-aec11f00-5f5d-11e9-8df7-ce60eda7dfa7.png" height="150px">
   <p align="center">The coolest and easiest way to manage your user's preferences on the client side with local storage.<p>
+
+  <p align="center">
+    <a href="https://npmjs.org/package/vue-preferences">
+      <img src="https://img.shields.io/npm/v/vue-preferences.svg" />
+    </a>
+    <a href="https://circleci.com/gh/streaver/vue-preferences/tree/master">
+      <img src="https://circleci.com/gh/streaver/vue-preferences/tree/master.svg?style=shield" />
+    </a>
+    <a href="https://codeclimate.com/github/streaver/vue-preferences/maintainability">
+      <img src="https://api.codeclimate.com/v1/badges/3e69b841f5089cb9b11c/maintainability" />
+    </a>
+    <a href="https://codeclimate.com/github/streaver/vue-preferences/test_coverage">
+      <img src="https://api.codeclimate.com/v1/badges/3e69b841f5089cb9b11c/test_coverage" />
+    </a>
+    <a href="https://github.com/streaver/vue-preferences/blob/master/LICENSE">
+      <img src="https://img.shields.io/github/license/streaver/vue-preferences.svg" />
+    </a>
+  </p>
 </p>
 
 ## Motivation
