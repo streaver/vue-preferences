@@ -1,6 +1,7 @@
 {
   "name": "vue-preferences",
-  "version": "0.1.0",
+  "version": "0.0.0",
+  "description": "The coolest and easiest way to manage your user's preferences through localStorage and no back-end calls at all.",
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
   "module": "dist/index.mjs",
@@ -14,6 +15,15 @@
     "dev": "microbundle watch",
     "test": "jest"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/streaver/vue-preferences.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/streaver/vue-preferences/issues"
+  },
+  "homepage": "https://github.com/streaver/vue-preferences#readme",
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
