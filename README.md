@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/11605133/56131403-aec11f00-5f5d-11e9-8df7-ce60eda7dfa7.png" height="150px">
-  <p align="center">The coolest and easiest way to manage your user's preferences on the client side witth local storage.<p>
+  <p align="center">The coolest and easiest way to manage your user's preferences on the client side with local storage.<p>
 </p>
 
 ## Motivation
@@ -10,7 +10,7 @@
 Many times happen that you want to handle some persistent state on your application
 but you find yourself that doing an actual call to your back-end is like "killing a mosquito with a bazooka". For those scenarios, we decided to create the `vue-preferences` library.
 
-With `vue-preferences` you can keep state of your app totally safely by using [window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) under the hood. This way you ensure your UX keeps consistent while at
+With `vue-preferences`, you can keep some state of your app totally safely by using [window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) under the hood. This way you ensure your UX keeps consistent while at
 the same time avoiding simple but annoying calls to your back-end. You can set some
 user preferences such as `theme color`, `users' default`, `hidden elements (after user opted-in)`, and many others you can imagine, with great simplicity.
 
@@ -23,7 +23,7 @@ user preferences such as `theme color`, `users' default`, `hidden elements (afte
 
 ## Installation
 
-If your prefer `yarn`:
+If you prefer `yarn`:
 
 ```
 $ yarn add vue-preferences --save
@@ -46,7 +46,7 @@ many at once and also with or without default values. Let's see what this means!
 
 Here you'll see how to create a single preference at a time.
 
-Basically you'd do something like:
+Basically, you'd do something like:
 
 ```js
   computed: {
@@ -158,7 +158,7 @@ will be `undefined`.
 
 #### Store data
 
-If you didn't defined the vue-preference as a computed property and instead as
+If you didn't define the vue-preference as a computed property and instead as
 a regular variable, then it might happen that you want to handle it by your own.
 
 If that's the case, you don't have other alternative than using the API to set
@@ -179,14 +179,14 @@ console.log('Current locale is:', locale.get());
 // prints "Current locale is: es"
 ```
 
-> This time the result is `es` not `en`.
+> This time the result is `es`, not `en`.
 
 ### Notes
 
 ⚡ Please note that the API for defining multiple preferences at the same time is
-different to the one for creating a single preference (`preference` vs `...mapPreferences`) ⚡
+different from the one for creating a single preference (`preference` vs `...mapPreferences`) ⚡
 
-🚀 In the near future we will be supporting other custom options that will add
+🚀 In the near future, we will be supporting other custom options that will add
 even more power to the preferences you set. Stay tuned and support!
 
 ## Contributing
@@ -195,8 +195,9 @@ All contributions or issue reporting are welcomed. If you are submitting a bug
 issue please include information to help us debug it!
 
 If you plan to contribute, please make sure you test the code. Any new feature or
-bug fix should have it's own test case.
+bug fix should have its own test case.
 
 ## Credits
 
 - <div>Icon made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+- We got inspiration from [ember-preferences](https://github.com/san650/ember-preferences) by our friend [@san650](https://github.com/san650), thank you 🎉!
