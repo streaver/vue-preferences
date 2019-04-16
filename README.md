@@ -63,6 +63,8 @@ Here you'll see how to create a single preference at a time.
 Basically, you would do something like:
 
 ```js
+  import { preference } from 'vue-preferences'
+
   computed: {
     isDarkMode: preference('isDarkModeEnabled', { defaultValue: false })
   }
@@ -87,6 +89,8 @@ We have two possible ways to create **multiple** `vue-preferences` properties at
 Suppose you want to create two properties `translatedTo` and `isZoomed`. In the _Array_ way, you could achieve that by doing:
 
 ```js
+  import { mapPreferences } from 'vue-preferences'
+
   computed: {
     ...mapPreferences(["translatedTo", "isZoomed"])
   }
