@@ -23,7 +23,9 @@ describe('VuePreferences#preference', () => {
     it('set function saves the value to window.localStorage', () => {
       subject.set('Alice');
 
-      expect(window.localStorage.getItem(preferenceKey)).toBe('Alice');
+      expect(JSON.parse(window.localStorage.getItem(preferenceKey))).toBe(
+        'Alice'
+      );
     });
 
     it('get function obtains value from window.localStorage', () => {
@@ -46,7 +48,9 @@ describe('VuePreferences#preference', () => {
     it('set function saves the value to window.localStorage', () => {
       subject.set('Bob');
 
-      expect(window.localStorage.getItem(preferenceKey)).toBe('Bob');
+      expect(JSON.parse(window.localStorage.getItem(preferenceKey))).toBe(
+        'Bob'
+      );
     });
 
     it('get function obtains value from window.localStorage', () => {
@@ -61,7 +65,56 @@ describe('VuePreferences#preference', () => {
 
     it('get function does not save the defaultValue when returning it', () => {
       expect(subject.get()).toBe('Alice');
-      expect(window.localStorage.getItem(preferenceKey)).toBe(null);
+      expect(JSON.parse(window.localStorage.getItem(preferenceKey))).toBe(null);
+    });
+  });
+
+  describe('saving any type of data', () => {
+    beforeEach(() => {
+      subject = preference('data');
+    });
+
+    it('saves and retrieves String values', () => {
+      subject.set('Alice');
+
+      expect(subject.get()).toBe('Alice');
+    });
+
+    // This is a special case where a user has modified localStorage
+    // manually but we still want to be consistent with whatever is
+    // returned
+    it('saves and retrieves empty String value', () => {
+      localStorage.setItem('vp:data', '');
+
+      expect(subject.get()).toBe('');
+    });
+
+    it('saves and retrieves Number values', () => {
+      subject.set(3.14);
+
+      expect(subject.get()).toBe(3.14);
+    });
+
+    it('saves and retrieves Boolean values', () => {
+      subject.set(false);
+
+      expect(subject.get()).toBe(false);
+
+      subject.set(true);
+
+      expect(subject.get()).toBe(true);
+    });
+
+    it('saves and retrieves Array values', () => {
+      subject.set([1, 'one', true, false]);
+
+      expect(subject.get()).toMatchObject([1, 'one', true, false]);
+    });
+
+    it('saves and retrieves Object values', () => {
+      subject.set({ name: 'Alice', darkMode: false });
+
+      expect(subject.get()).toMatchObject({ name: 'Alice', darkMode: false });
     });
   });
 });

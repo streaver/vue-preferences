@@ -21,11 +21,21 @@ function mergeOptionsFor(name, globalOptions, specificOptions) {
 }
 
 function getPreference(key, options) {
-  return window.localStorage.getItem(key) || options.defaultValue;
+  const value = window.localStorage.getItem(key);
+
+  if (value === null) {
+    return options.defaultValue;
+  }
+
+  try {
+    return JSON.parse(value);
+  } catch (e) {
+    return value === '' ? value : value || options.defaultValue;
+  }
 }
 
 function setPreference(key, value) {
-  window.localStorage.setItem(key, value);
+  window.localStorage.setItem(key, JSON.stringify(value));
 
   return value;
 }
