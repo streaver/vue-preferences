@@ -32,7 +32,7 @@ describe('VuePreferences#mapPreferences', () => {
 
           preference.set(`Alice-${index}`);
 
-          expect(window.localStorage.getItem(preferenceKey)).toBe(
+          expect(JSON.parse(window.localStorage.getItem(preferenceKey))).toBe(
             `Alice-${index}`
           );
         });
@@ -81,7 +81,7 @@ describe('VuePreferences#mapPreferences', () => {
 
           preference.set(`Alice-${index}`);
 
-          expect(window.localStorage.getItem(preferenceKey)).toBe(
+          expect(JSON.parse(window.localStorage.getItem(preferenceKey))).toBe(
             `Alice-${index}`
           );
         });

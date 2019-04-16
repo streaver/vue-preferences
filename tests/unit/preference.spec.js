@@ -23,7 +23,9 @@ describe('VuePreferences#preference', () => {
     it('set function saves the value to window.localStorage', () => {
       subject.set('Alice');
 
-      expect(window.localStorage.getItem(preferenceKey)).toBe('Alice');
+      expect(JSON.parse(window.localStorage.getItem(preferenceKey))).toBe(
+        'Alice'
+      );
     });
 
     it('get function obtains value from window.localStorage', () => {
@@ -46,7 +48,9 @@ describe('VuePreferences#preference', () => {
     it('set function saves the value to window.localStorage', () => {
       subject.set('Bob');
 
-      expect(window.localStorage.getItem(preferenceKey)).toBe('Bob');
+      expect(JSON.parse(window.localStorage.getItem(preferenceKey))).toBe(
+        'Bob'
+      );
     });
 
     it('get function obtains value from window.localStorage', () => {
@@ -61,7 +65,7 @@ describe('VuePreferences#preference', () => {
 
     it('get function does not save the defaultValue when returning it', () => {
       expect(subject.get()).toBe('Alice');
-      expect(window.localStorage.getItem(preferenceKey)).toBe(null);
+      expect(JSON.parse(window.localStorage.getItem(preferenceKey))).toBe(null);
     });
   });
 });

@@ -21,11 +21,17 @@ function mergeOptionsFor(name, globalOptions, specificOptions) {
 }
 
 function getPreference(key, options) {
-  return window.localStorage.getItem(key) || options.defaultValue;
+  const value = window.localStorage.getItem(key) || options.defaultValue;
+
+  try {
+    return JSON.parse(value);
+  } catch (e) {
+    return value;
+  }
 }
 
 function setPreference(key, value) {
-  window.localStorage.setItem(key, value);
+  window.localStorage.setItem(key, JSON.stringify(value));
 
   return value;
 }
