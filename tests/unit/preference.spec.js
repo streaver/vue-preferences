@@ -80,6 +80,15 @@ describe('VuePreferences#preference', () => {
       expect(subject.get()).toBe('Alice');
     });
 
+    // This is a special case where a user has modified localStorage
+    // manually but we still want to be consistent with whatever is
+    // returned
+    it('saves and retrieves empty String value', () => {
+      localStorage.setItem('vp:data', '');
+
+      expect(subject.get()).toBe('');
+    });
+
     it('saves and retrieves Number values', () => {
       subject.set(3.14);
 
