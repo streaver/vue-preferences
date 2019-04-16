@@ -68,4 +68,44 @@ describe('VuePreferences#preference', () => {
       expect(JSON.parse(window.localStorage.getItem(preferenceKey))).toBe(null);
     });
   });
+
+  describe('saving any type of data', () => {
+    beforeEach(() => {
+      subject = preference('data');
+    });
+
+    it('saves and retrieves String values', () => {
+      subject.set('Alice');
+
+      expect(subject.get()).toBe('Alice');
+    });
+
+    it('saves and retrieves Number values', () => {
+      subject.set(3.14);
+
+      expect(subject.get()).toBe(3.14);
+    });
+
+    it('saves and retrieves Boolean values', () => {
+      subject.set(false);
+
+      expect(subject.get()).toBe(false);
+
+      subject.set(true);
+
+      expect(subject.get()).toBe(true);
+    });
+
+    it('saves and retrieves Array values', () => {
+      subject.set([1, 'one', true, false]);
+
+      expect(subject.get()).toMatchObject([1, 'one', true, false]);
+    });
+
+    it('saves and retrieves Object values', () => {
+      subject.set({ name: 'Alice', darkMode: false });
+
+      expect(subject.get()).toMatchObject({ name: 'Alice', darkMode: false });
+    });
+  });
 });
