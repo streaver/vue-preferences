@@ -12,10 +12,10 @@
       <img src="https://circleci.com/gh/streaver/vue-preferences/tree/master.svg?style=shield" />
     </a>
     <a href="https://codeclimate.com/github/streaver/vue-preferences/maintainability">
-      <img src="https://api.codeclimate.com/v1/badges/3e69b841f5089cb9b11c/maintainability" />
+      <img src="https://api.codeclimate.com/v1/badges/e6725f51619a0c309f80/maintainability" />
     </a>
     <a href="https://codeclimate.com/github/streaver/vue-preferences/test_coverage">
-      <img src="https://api.codeclimate.com/v1/badges/3e69b841f5089cb9b11c/test_coverage" />
+      <img src="https://api.codeclimate.com/v1/badges/e6725f51619a0c309f80/test_coverage" />
     </a>
     <a href="https://github.com/streaver/vue-preferences/blob/master/LICENSE">
       <img src="https://img.shields.io/github/license/streaver/vue-preferences.svg" />
