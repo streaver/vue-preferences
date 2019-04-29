@@ -40,17 +40,34 @@ function setPreference(key, value) {
   return value;
 }
 
+function getTrackingProperty(component, key) {
+  return component['vp:tracked'][key];
+}
+
+function setTrackingProperty(component, key, value) {
+  const trackingObject = component['vp:tracked'];
+
+  component.$set(trackingObject, key, value);
+}
+
 export function preference(name, opts = {}) {
   const key = buildKey(name);
 
   return {
     get() {
-      const options = mergeOptionsFor(name, this.$preferences, opts);
+      const component = this;
+      const options = mergeOptionsFor(name, component.$preferences, opts);
+      const initialValue = getPreference(key, options);
+      const trackedValue = getTrackingProperty(component, key);
 
-      return getPreference(key, options);
+      return trackedValue || initialValue;
     },
 
     set(value) {
+      const component = this;
+
+      setTrackingProperty(component, key, value);
+
       return setPreference(key, value);
     },
   };
@@ -68,6 +85,14 @@ export function mapPreferences(preferences) {
 
 function install(Vue) {
   Vue.prototype.$preferences = {};
+
+  Vue.mixin({
+    data() {
+      return {
+        'vp:tracked': {},
+      };
+    },
+  });
 }
 
 export default { install };
