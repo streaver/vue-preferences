@@ -1,4 +1,5 @@
 export const DEFAULT_STORAGE_PREFIX = 'vp';
+export const DEFAULT_REACTIVE_PROPERTIES_PREFIX = `${DEFAULT_STORAGE_PREFIX}:tracked`;
 
 function buildKey(name, prefix = DEFAULT_STORAGE_PREFIX) {
   return `${prefix}:${name}`;
@@ -41,32 +42,35 @@ function setPreference(key, value) {
 }
 
 function getTrackingProperty(component, key) {
-  return component['vp:tracked'][key];
+  return component.$get(DEFAULT_REACTIVE_PROPERTIES_PREFIX)[key];
 }
 
 function setTrackingProperty(component, key, value) {
-  const trackingObject = component['vp:tracked'];
+  const trackingObject = component[DEFAULT_REACTIVE_PROPERTIES_PREFIX];
 
   component.$set(trackingObject, key, value);
 }
 
 export function preference(name, opts = {}) {
   const key = buildKey(name);
+  const component = this || {};
 
   return {
     get() {
-      const component = this;
       const options = mergeOptionsFor(name, component.$preferences, opts);
       const initialValue = getPreference(key, options);
-      const trackedValue = getTrackingProperty(component, key);
 
-      return trackedValue || initialValue;
+      if (opts.reactive) {
+        return getTrackingProperty(component, key);
+      }
+
+      return initialValue;
     },
 
     set(value) {
-      const component = this;
-
-      setTrackingProperty(component, key, value);
+      if (opts.reactive) {
+        setTrackingProperty(component, key, value);
+      }
 
       return setPreference(key, value);
     },
