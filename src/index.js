@@ -42,7 +42,7 @@ function setPreference(key, value) {
 }
 
 function getTrackingProperty(component, key) {
-  return component.$get(DEFAULT_REACTIVE_PROPERTIES_PREFIX)[key];
+  return component[DEFAULT_REACTIVE_PROPERTIES_PREFIX][key];
 }
 
 function setTrackingProperty(component, key, value) {
@@ -53,22 +53,24 @@ function setTrackingProperty(component, key, value) {
 
 export function preference(name, opts = {}) {
   const key = buildKey(name);
-  const component = this || {};
 
   return {
     get() {
+      const component = this || {};
       const options = mergeOptionsFor(name, component.$preferences, opts);
-      const initialValue = getPreference(key, options);
 
       if (opts.reactive) {
         return getTrackingProperty(component, key);
       }
 
-      return initialValue;
+      return getPreference(key, options);
     },
 
     set(value) {
-      if (opts.reactive) {
+      const component = this || {};
+      const options = mergeOptionsFor(name, component.$preferences, opts);
+
+      if (options.reactive) {
         setTrackingProperty(component, key, value);
       }
 
