@@ -1,5 +1,5 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
-import VuePreferences, {
+import setupVue from '../utils/setup-vue';
+import {
   preference,
   DEFAULT_STORAGE_PREFIX,
   DEFAULT_REACTIVE_PROPERTIES_PREFIX,
@@ -75,38 +75,14 @@ describe('VuePreferences#preference', () => {
   });
 
   describe('using reactive option', () => {
-    let wrapper, setSpy, getItemSpy;
-
-    beforeEach(() => {
-      const localVue = createLocalVue();
-
-      localVue.use(VuePreferences);
-
-      const Paragraph = localVue.component('Paragraph', {
-        name: 'Paragraph',
-        template: '<p>Hello!</p>',
-      });
-
-      wrapper = shallowMount(Paragraph, { localVue });
-
-      setSpy = jest.spyOn(wrapper.vm, '$set');
-      getItemSpy = jest.spyOn(Storage.prototype, 'getItem');
-
+    it('sets the reactive properties', () => {
       subject = preference(preferenceName, {
         defaultValue: 'Alice',
         reactive: true,
       });
 
-      subject.get = subject.get.bind(wrapper.vm);
-      subject.set = subject.set.bind(wrapper.vm);
-    });
+      const { wrapper, setSpy, getItemSpy } = setupVue(subject);
 
-    afterEach(() => {
-      setSpy.mockRestore();
-      getItemSpy.mockRestore();
-    });
-
-    it('sets the reactive properties', () => {
       subject.set('Bob');
 
       expect(setSpy).toHaveBeenCalledTimes(1);
@@ -115,6 +91,9 @@ describe('VuePreferences#preference', () => {
         [`${DEFAULT_STORAGE_PREFIX}:${preferenceName}`]: 'Bob',
       });
       expect(getItemSpy).not.toHaveBeenCalled();
+
+      setSpy.mockRestore();
+      getItemSpy.mockRestore();
     });
   });
 
