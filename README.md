@@ -54,6 +54,20 @@ $ npm install vue-preferences --save
 
 You can define your `vue-preferences` in many ways. You can create them one by one, many at once and also with or without default values. Let's see what this means!
 
+But first, remember to install the plugin before using it with:
+
+```javascript
+import VuePreferences from 'vue-preferences';
+
+Vue.use(VuePreferences);
+
+new Vue({
+  render: h => h(App),
+}).$mount('#app');
+```
+
+This only needs to be done once, in the `main.js` or `index.js` file of your app, where you mount the Vue app for the first time.
+
 ### Declaring vue-preferences
 
 #### Single preference at a time
