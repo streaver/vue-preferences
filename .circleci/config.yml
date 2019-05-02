@@ -1,16 +1,16 @@
 ---
 version: 2
 jobs:
-  node-latest: &test
+  node-10: &test
     docker:
-      - image: node:latest
+      - image: node:10
     working_directory: ~/vue-preferences
     steps:
       - checkout
       - restore_cache: &restore_cache
           keys:
-            - v1-npm-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
-            - v1-npm-{{checksum ".circleci/config.yml"}}
+            - v2-npm-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
+            - v2-npm-{{checksum ".circleci/config.yml"}}
       - run:
           name: Setup Code Climate test-reporter
           command: |
@@ -51,7 +51,7 @@ jobs:
           name: Install dependencies
           command: yarn
       - save_cache:
-          key: v1-npm-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
+          key: v2-npm-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
           paths:
             - ~/cli/node_modules
             - /usr/local/share/.cache/yarn
@@ -61,7 +61,7 @@ workflows:
   version: 2
   'vue-preferences':
     jobs:
-      - node-latest
+      - node-10
       - node-8
       - cache:
           filters:
