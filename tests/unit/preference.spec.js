@@ -90,7 +90,7 @@ describe('VuePreferences#preference', () => {
       expect(wrapper.vm[DEFAULT_REACTIVE_PROPERTIES_PREFIX]).toEqual({
         [`${DEFAULT_STORAGE_PREFIX}:${preferenceName}`]: 'Bob',
       });
-      expect(getItemSpy).not.toHaveBeenCalled();
+      expect(getItemSpy).toHaveBeenCalledTimes(1);
 
       setSpy.mockRestore();
       getItemSpy.mockRestore();

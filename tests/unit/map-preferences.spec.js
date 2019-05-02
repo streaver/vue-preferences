@@ -136,12 +136,11 @@ describe('VuePreferences#mapPreferences', () => {
             expect(wrapper.vm[DEFAULT_REACTIVE_PROPERTIES_PREFIX]).toEqual({
               [`${DEFAULT_STORAGE_PREFIX}:${preferenceName}`]: `Alice - ${index}`,
             });
-            expect(getItemSpy).not.toHaveBeenCalled();
           } else {
-            expect(setSpy).not.toHaveBeenCalled();
             expect(wrapper.vm[DEFAULT_REACTIVE_PROPERTIES_PREFIX]).toEqual({});
-            expect(getItemSpy).toHaveBeenCalledTimes(1);
           }
+
+          expect(getItemSpy).toHaveBeenCalledTimes(1);
 
           setSpy.mockRestore();
           getItemSpy.mockRestore();

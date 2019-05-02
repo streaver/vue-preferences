@@ -42,7 +42,9 @@ function setPreference(key, value) {
 }
 
 function getTrackingProperty(component, key) {
-  return component[DEFAULT_REACTIVE_PROPERTIES_PREFIX][key];
+  const trackingObject = component[DEFAULT_REACTIVE_PROPERTIES_PREFIX];
+
+  return trackingObject ? trackingObject[key] : undefined;
 }
 
 function setTrackingProperty(component, key, value) {
@@ -53,28 +55,30 @@ function setTrackingProperty(component, key, value) {
 
 export function preference(name, opts = {}) {
   const key = buildKey(name);
+  let isReactivitySetup = false;
 
   return {
     get() {
       const component = this || {};
       const options = mergeOptionsFor(name, component.$preferences, opts);
+      const nonReactiveValue = getPreference(key, options);
+      const reactiveValue = getTrackingProperty(component, key);
 
-      if (opts.reactive) {
-        return getTrackingProperty(component, key);
-      }
-
-      return getPreference(key, options);
+      return opts.reactive && isReactivitySetup
+        ? reactiveValue
+        : nonReactiveValue;
     },
 
     set(value) {
       const component = this || {};
       const options = mergeOptionsFor(name, component.$preferences, opts);
 
+      setPreference(key, value);
+
       if (options.reactive) {
         setTrackingProperty(component, key, value);
+        isReactivitySetup = true;
       }
-
-      return setPreference(key, value);
     },
   };
 }
