@@ -13,7 +13,8 @@
   "scripts": {
     "build": "microbundle",
     "dev": "microbundle watch",
-    "test": "jest"
+    "test": "jest",
+    "sample:build": "yarn build && npm link && cd examples/sample-app && yarn install && npm link vue-preferences && yarn build --mode development"
   },
   "repository": {
     "type": "git",
