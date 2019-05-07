@@ -9,7 +9,7 @@ describe('VuePreferences#preference', () => {
   const preferenceName = 'firstName';
   const preferenceKey = `${DEFAULT_STORAGE_PREFIX}:${preferenceName}`;
 
-  let subject;
+  let subject, vueMock;
 
   beforeEach(() => {
     window.localStorage.clear();
@@ -18,6 +18,12 @@ describe('VuePreferences#preference', () => {
   describe('using no options', () => {
     beforeEach(() => {
       subject = preference(preferenceName);
+
+      vueMock = setupVue(subject);
+    });
+
+    afterEach(() => {
+      vueMock.restore();
     });
 
     it('returns an object with get/set functions', () => {
@@ -43,6 +49,12 @@ describe('VuePreferences#preference', () => {
   describe('using defaultValue option', () => {
     beforeEach(() => {
       subject = preference(preferenceName, { defaultValue: 'Alice' });
+
+      vueMock = setupVue(subject);
+    });
+
+    afterEach(() => {
+      vueMock.restore();
     });
 
     it('returns an object with get/set functions', () => {
@@ -75,31 +87,56 @@ describe('VuePreferences#preference', () => {
   });
 
   describe('using reactive option', () => {
-    it('sets the reactive properties', () => {
+    it('sets the reactive properties when reactivity is set to true', () => {
       subject = preference(preferenceName, {
         defaultValue: 'Alice',
         reactive: true,
       });
 
-      const { wrapper, setSpy, getItemSpy } = setupVue(subject);
+      vueMock = setupVue(subject);
 
       subject.set('Bob');
 
-      expect(setSpy).toHaveBeenCalledTimes(1);
+      expect(vueMock.setSpy).toHaveBeenCalledTimes(1);
       expect(subject.get()).toBe('Bob');
-      expect(wrapper.vm[DEFAULT_REACTIVE_PROPERTIES_PREFIX]).toEqual({
+      expect(vueMock.wrapper.vm[DEFAULT_REACTIVE_PROPERTIES_PREFIX]).toEqual({
         [`${DEFAULT_STORAGE_PREFIX}:${preferenceName}`]: 'Bob',
       });
-      expect(getItemSpy).toHaveBeenCalledTimes(1);
+      expect(vueMock.getItemSpy).toHaveBeenCalledTimes(1);
 
-      setSpy.mockRestore();
-      getItemSpy.mockRestore();
+      vueMock.restore();
+    });
+
+    it('does not set the reactive properties when reactivity is set to false', () => {
+      subject = preference(preferenceName, {
+        defaultValue: 'Alice',
+        reactive: false,
+      });
+
+      vueMock = setupVue(subject);
+
+      subject.set('Bob');
+
+      expect(vueMock.setSpy).not.toHaveBeenCalled();
+      expect(subject.get()).toBe('Bob');
+      expect(vueMock.wrapper.vm[DEFAULT_REACTIVE_PROPERTIES_PREFIX]).toEqual(
+        {}
+      );
+      expect(vueMock.getItemSpy).toHaveBeenCalledTimes(1);
+
+      vueMock.restore();
     });
   });
 
   describe('saving any type of data', () => {
     beforeEach(() => {
       subject = preference('data');
+
+      vueMock = setupVue(subject);
+    });
+
+    afterEach(() => {
+      vueMock.restore();
     });
 
     it('saves and retrieves String values', () => {

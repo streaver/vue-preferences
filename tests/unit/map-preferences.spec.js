@@ -24,9 +24,13 @@ describe('VuePreferences#mapPreferences', () => {
         preferenceNames.forEach(preferenceName => {
           const preference = subject[preferenceName];
 
+          const mockVue = setupVue(preference);
+
           expect(preference).toBeDefined();
           expect(preference.get).toBeInstanceOf(Function);
           expect(preference.set).toBeInstanceOf(Function);
+
+          mockVue.restore();
         });
       });
 
@@ -35,11 +39,15 @@ describe('VuePreferences#mapPreferences', () => {
           const preference = subject[preferenceName];
           const preferenceKey = `${DEFAULT_STORAGE_PREFIX}:${preferenceName}`;
 
+          const mockVue = setupVue(preference);
+
           preference.set(`Alice-${index}`);
 
           expect(JSON.parse(window.localStorage.getItem(preferenceKey))).toBe(
             `Alice-${index}`
           );
+
+          mockVue.restore();
         });
       });
 
@@ -48,9 +56,13 @@ describe('VuePreferences#mapPreferences', () => {
           const preference = subject[preferenceName];
           const preferenceKey = `${DEFAULT_STORAGE_PREFIX}:${preferenceName}`;
 
+          const mockVue = setupVue(preference);
+
           window.localStorage.setItem(preferenceKey, `Alice-${index}`);
 
           expect(preference.get(preferenceName)).toBe(`Alice-${index}`);
+
+          mockVue.restore();
         });
       });
     });
@@ -73,9 +85,13 @@ describe('VuePreferences#mapPreferences', () => {
         Object.keys(preferencesObject).forEach(preferenceName => {
           const preference = subject[preferenceName];
 
+          const mockVue = setupVue(preference);
+
           expect(preference).toBeDefined();
           expect(preference.get).toBeInstanceOf(Function);
           expect(preference.set).toBeInstanceOf(Function);
+
+          mockVue.restore();
         });
       });
 
@@ -84,11 +100,15 @@ describe('VuePreferences#mapPreferences', () => {
           const preference = subject[preferenceName];
           const preferenceKey = `${DEFAULT_STORAGE_PREFIX}:${preferenceName}`;
 
+          const mockVue = setupVue(preference);
+
           preference.set(`Alice-${index}`);
 
           expect(JSON.parse(window.localStorage.getItem(preferenceKey))).toBe(
             `Alice-${index}`
           );
+
+          mockVue.restore();
         });
       });
 
@@ -97,9 +117,13 @@ describe('VuePreferences#mapPreferences', () => {
           const preference = subject[preferenceName];
           const preferenceKey = `${DEFAULT_STORAGE_PREFIX}:${preferenceName}`;
 
+          const mockVue = setupVue(preference);
+
           window.localStorage.setItem(preferenceKey, `Alice-${index}`);
 
           expect(preference.get(preferenceName)).toBe(`Alice-${index}`);
+
+          mockVue.restore();
         });
       });
 
@@ -108,15 +132,21 @@ describe('VuePreferences#mapPreferences', () => {
           const preference = subject[preferenceName];
           const defaultValue = preferencesObject[preferenceName].defaultValue;
 
+          const mockVue = setupVue(preference);
+
           expect(preference.get(preferenceName)).toBe(defaultValue);
+
+          mockVue.restore();
         });
       });
 
-      it('sets up reactivity for the preferences that require it', () => {
+      it('does not set up reactivity for the preferences does not require it', () => {
         const preferencesObject = {
-          firstName: {},
-          lastName: {
+          firstName: {
             reactive: true,
+          },
+          lastName: {
+            reactive: false,
           },
         };
 
@@ -125,7 +155,7 @@ describe('VuePreferences#mapPreferences', () => {
         Object.keys(preferencesObject).forEach((preferenceName, index) => {
           const preference = subject[preferenceName];
           const reactive = preferencesObject[preferenceName].reactive;
-          const { wrapper, setSpy, getItemSpy } = setupVue(preference);
+          const { wrapper, setSpy, getItemSpy, restore } = setupVue(preference);
 
           preference.set(`Alice - ${index}`);
 
@@ -142,8 +172,7 @@ describe('VuePreferences#mapPreferences', () => {
 
           expect(getItemSpy).toHaveBeenCalledTimes(1);
 
-          setSpy.mockRestore();
-          getItemSpy.mockRestore();
+          restore();
         });
       });
     });

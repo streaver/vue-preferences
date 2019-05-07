@@ -80,7 +80,7 @@ Basically, you would do something like:
   import { preference } from 'vue-preferences'
 
   computed: {
-    isDarkMode: preference('isDarkModeEnabled', { defaultValue: false, reactive: true })
+    isDarkMode: preference('isDarkModeEnabled', { defaultValue: false, reactive: false })
   }
 ```
 
@@ -203,7 +203,7 @@ For now, this is the list of available options:
 | Option  | Default Value | Description |
 | ------------- | ------------- | ------------- |
 | `defaultValue`  | `undefined`  | Allows you to set up the preference with a custom default value. This allows you to ensures that even the first time the preference is read you will get something. |
-| `reactive`  | `false`  | This will make the preference reactive. If you use the property in your template/code you can expect it to be observed and trigger re-renders, just like normal computed properties while at the same time the values get persisted to `localStorage`. |
+| `reactive`  | `true`  | By default preferences are reactive. This means that if you use the property in your template/code you can expect it to be observed and trigger re-renders, just like normal computed properties while at the same time the values get persisted to `localStorage`. If you disable this behavior the property will not trigger re-renders/re-computation of dependant code |
 
 ### Notes
 

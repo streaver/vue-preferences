@@ -19,5 +19,13 @@ export default function setupVue(subject) {
   subject.get = subject.get.bind(wrapper.vm);
   subject.set = subject.set.bind(wrapper.vm);
 
-  return { getItemSpy, setSpy, wrapper };
+  return {
+    getItemSpy,
+    setSpy,
+    wrapper,
+    restore: () => {
+      setSpy.mockRestore();
+      getItemSpy.mockRestore();
+    },
+  };
 }

@@ -1,6 +1,8 @@
 export const DEFAULT_STORAGE_PREFIX = 'vp';
 export const DEFAULT_REACTIVE_PROPERTIES_PREFIX = `${DEFAULT_STORAGE_PREFIX}:tracked`;
 
+const DEFAULT_OPTIONS = { reactive: true };
+
 function buildKey(name, prefix = DEFAULT_STORAGE_PREFIX) {
   return `${prefix}:${name}`;
 }
@@ -81,12 +83,13 @@ function buildSetterFunction(name, key, opts, setupStatus) {
 }
 
 export function preference(name, opts = {}) {
+  const options = { ...DEFAULT_OPTIONS, ...opts };
   const key = buildKey(name);
   const setupStatus = { isReactivitySetup: false };
 
   return {
-    get: buildGetterFunction(name, key, opts, setupStatus),
-    set: buildSetterFunction(name, key, opts, setupStatus),
+    get: buildGetterFunction(name, key, options, setupStatus),
+    set: buildSetterFunction(name, key, options, setupStatus),
   };
 }
 
