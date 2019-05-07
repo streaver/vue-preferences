@@ -1,4 +1,9 @@
-import { mapPreferences, DEFAULT_STORAGE_PREFIX } from '../../src/index';
+import setupVue from '../utils/setup-vue';
+import {
+  mapPreferences,
+  DEFAULT_STORAGE_PREFIX,
+  DEFAULT_REACTIVE_PROPERTIES_PREFIX,
+} from '../../src/index';
 
 describe('VuePreferences#mapPreferences', () => {
   beforeEach(() => {
@@ -19,9 +24,13 @@ describe('VuePreferences#mapPreferences', () => {
         preferenceNames.forEach(preferenceName => {
           const preference = subject[preferenceName];
 
+          const mockVue = setupVue(preference);
+
           expect(preference).toBeDefined();
           expect(preference.get).toBeInstanceOf(Function);
           expect(preference.set).toBeInstanceOf(Function);
+
+          mockVue.restore();
         });
       });
 
@@ -30,11 +39,15 @@ describe('VuePreferences#mapPreferences', () => {
           const preference = subject[preferenceName];
           const preferenceKey = `${DEFAULT_STORAGE_PREFIX}:${preferenceName}`;
 
+          const mockVue = setupVue(preference);
+
           preference.set(`Alice-${index}`);
 
           expect(JSON.parse(window.localStorage.getItem(preferenceKey))).toBe(
             `Alice-${index}`
           );
+
+          mockVue.restore();
         });
       });
 
@@ -43,9 +56,13 @@ describe('VuePreferences#mapPreferences', () => {
           const preference = subject[preferenceName];
           const preferenceKey = `${DEFAULT_STORAGE_PREFIX}:${preferenceName}`;
 
+          const mockVue = setupVue(preference);
+
           window.localStorage.setItem(preferenceKey, `Alice-${index}`);
 
           expect(preference.get(preferenceName)).toBe(`Alice-${index}`);
+
+          mockVue.restore();
         });
       });
     });
@@ -68,9 +85,13 @@ describe('VuePreferences#mapPreferences', () => {
         Object.keys(preferencesObject).forEach(preferenceName => {
           const preference = subject[preferenceName];
 
+          const mockVue = setupVue(preference);
+
           expect(preference).toBeDefined();
           expect(preference.get).toBeInstanceOf(Function);
           expect(preference.set).toBeInstanceOf(Function);
+
+          mockVue.restore();
         });
       });
 
@@ -79,11 +100,15 @@ describe('VuePreferences#mapPreferences', () => {
           const preference = subject[preferenceName];
           const preferenceKey = `${DEFAULT_STORAGE_PREFIX}:${preferenceName}`;
 
+          const mockVue = setupVue(preference);
+
           preference.set(`Alice-${index}`);
 
           expect(JSON.parse(window.localStorage.getItem(preferenceKey))).toBe(
             `Alice-${index}`
           );
+
+          mockVue.restore();
         });
       });
 
@@ -92,9 +117,13 @@ describe('VuePreferences#mapPreferences', () => {
           const preference = subject[preferenceName];
           const preferenceKey = `${DEFAULT_STORAGE_PREFIX}:${preferenceName}`;
 
+          const mockVue = setupVue(preference);
+
           window.localStorage.setItem(preferenceKey, `Alice-${index}`);
 
           expect(preference.get(preferenceName)).toBe(`Alice-${index}`);
+
+          mockVue.restore();
         });
       });
 
@@ -103,7 +132,47 @@ describe('VuePreferences#mapPreferences', () => {
           const preference = subject[preferenceName];
           const defaultValue = preferencesObject[preferenceName].defaultValue;
 
+          const mockVue = setupVue(preference);
+
           expect(preference.get(preferenceName)).toBe(defaultValue);
+
+          mockVue.restore();
+        });
+      });
+
+      it('does not set up reactivity for the preferences does not require it', () => {
+        const preferencesObject = {
+          firstName: {
+            reactive: true,
+          },
+          lastName: {
+            reactive: false,
+          },
+        };
+
+        subject = mapPreferences(preferencesObject);
+
+        Object.keys(preferencesObject).forEach((preferenceName, index) => {
+          const preference = subject[preferenceName];
+          const reactive = preferencesObject[preferenceName].reactive;
+          const { wrapper, setSpy, getItemSpy, restore } = setupVue(preference);
+
+          preference.set(`Alice - ${index}`);
+
+          expect(preference.get()).toBe(`Alice - ${index}`);
+
+          if (reactive) {
+            expect(setSpy).toHaveBeenCalledTimes(1);
+            expect(wrapper.vm[DEFAULT_REACTIVE_PROPERTIES_PREFIX]).toEqual({
+              [`${DEFAULT_STORAGE_PREFIX}:${preferenceName}`]: `Alice - ${index}`,
+            });
+          } else {
+            expect(wrapper.vm[DEFAULT_REACTIVE_PROPERTIES_PREFIX]).toEqual({});
+          }
+
+          expect(getItemSpy).toHaveBeenCalledTimes(1);
+
+          restore();
         });
       });
     });

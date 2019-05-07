@@ -54,6 +54,20 @@ $ npm install vue-preferences --save
 
 You can define your `vue-preferences` in many ways. You can create them one by one, many at once and also with or without default values. Let's see what this means!
 
+But first, remember to install the plugin before using it with:
+
+```javascript
+import VuePreferences from 'vue-preferences';
+
+Vue.use(VuePreferences);
+
+new Vue({
+  render: h => h(App),
+}).$mount('#app');
+```
+
+This only needs to be done once, in the `main.js` or `index.js` file of your app, where you mount the Vue app for the first time.
+
 ### Declaring vue-preferences
 
 #### Single preference at a time
@@ -66,11 +80,11 @@ Basically, you would do something like:
   import { preference } from 'vue-preferences'
 
   computed: {
-    isDarkMode: preference('isDarkModeEnabled', { defaultValue: false })
+    isDarkMode: preference('isDarkModeEnabled', { defaultValue: false, reactive: false })
   }
 ```
 
-or without `defaultValue`, no need to pass an `options` object in this case
+keep in mind that there is no need to pass an `options` object if you don't need it
 
 ```js
   computed: {
@@ -180,11 +194,20 @@ console.log('Current locale is:', locale.get());
 
 > This time the result is `es`, not `en`.
 
+### Options
+
+🚀 In the near future, we will be supporting other custom options that will add even more power to the preferences you set. Stay tuned and support!
+
+For now, this is the list of available options:
+
+| Option  | Default Value | Description |
+| ------------- | ------------- | ------------- |
+| `defaultValue`  | `undefined`  | Allows you to set up the preference with a custom default value. This allows you to ensures that even the first time the preference is read you will get something. |
+| `reactive`  | `true`  | By default preferences are reactive. This means that if you use the property in your template/code you can expect it to be observed and trigger re-renders, just like normal computed properties while at the same time the values get persisted to `localStorage`. If you disable this behavior the property will not trigger re-renders/re-computation of dependant code |
+
 ### Notes
 
 ⚡ Please note that the API for defining multiple preferences at the same time is different from the one for creating a single preference (`preference` vs `...mapPreferences`) ⚡
-
-🚀 In the near future, we will be supporting other custom options that will add even more power to the preferences you set. Stay tuned and support!
 
 ## Contributing
 

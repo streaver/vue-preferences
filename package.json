@@ -27,13 +27,16 @@
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
+    "@vue/test-utils": "^1.0.0-beta.29",
     "babel-jest": "^24.7.1",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "eslint": "^5.16.0",
     "jest": "^24.7.1",
     "microbundle": "^0.11.0",
-    "prettier": "1.17.0"
+    "prettier": "1.17.0",
+    "vue": "^2.6.10",
+    "vue-template-compiler": "^2.6.10"
   }
 }

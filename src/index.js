@@ -1,4 +1,7 @@
 export const DEFAULT_STORAGE_PREFIX = 'vp';
+export const DEFAULT_REACTIVE_PROPERTIES_PREFIX = `${DEFAULT_STORAGE_PREFIX}:tracked`;
+
+const DEFAULT_OPTIONS = { reactive: true };
 
 function buildKey(name, prefix = DEFAULT_STORAGE_PREFIX) {
   return `${prefix}:${name}`;
@@ -40,19 +43,53 @@ function setPreference(key, value) {
   return value;
 }
 
+function getTrackingProperty(component, key) {
+  const trackingObject = component[DEFAULT_REACTIVE_PROPERTIES_PREFIX];
+
+  return trackingObject ? trackingObject[key] : undefined;
+}
+
+function setTrackingProperty(component, key, value) {
+  const trackingObject = component[DEFAULT_REACTIVE_PROPERTIES_PREFIX];
+
+  component.$set(trackingObject, key, value);
+}
+
+function buildGetterFunction(name, key, opts, setupStatus) {
+  return function() {
+    const component = this || {};
+    const options = mergeOptionsFor(name, component.$preferences, opts);
+    const nonReactiveValue = getPreference(key, options);
+    const reactiveValue = getTrackingProperty(component, key);
+
+    return opts.reactive && setupStatus.isReactivitySetup
+      ? reactiveValue
+      : nonReactiveValue;
+  };
+}
+
+function buildSetterFunction(name, key, opts, setupStatus) {
+  return function(value) {
+    const component = this || {};
+    const options = mergeOptionsFor(name, component.$preferences, opts);
+
+    setPreference(key, value);
+
+    if (options.reactive) {
+      setTrackingProperty(component, key, value);
+      setupStatus.isReactivitySetup = true;
+    }
+  };
+}
+
 export function preference(name, opts = {}) {
+  const options = { ...DEFAULT_OPTIONS, ...opts };
   const key = buildKey(name);
+  const setupStatus = { isReactivitySetup: false };
 
   return {
-    get() {
-      const options = mergeOptionsFor(name, this.$preferences, opts);
-
-      return getPreference(key, options);
-    },
-
-    set(value) {
-      return setPreference(key, value);
-    },
+    get: buildGetterFunction(name, key, options, setupStatus),
+    set: buildSetterFunction(name, key, options, setupStatus),
   };
 }
 
@@ -68,6 +105,18 @@ export function mapPreferences(preferences) {
 
 function install(Vue) {
   Vue.prototype.$preferences = {};
+
+  // We need to have one object to which we can dynamically add
+  // the the values of the preferences so we can use Vue's reactivity
+  // system to track changes. This object cannot be added on run-time, but
+  // it can be modified.
+  Vue.mixin({
+    data() {
+      return {
+        'vp:tracked': {},
+      };
+    },
+  });
 }
 
 export default { install };
