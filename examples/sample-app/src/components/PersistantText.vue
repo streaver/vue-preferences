@@ -9,35 +9,33 @@
           v-on="on"
         ></v-text-field>
       </template>
-      <span>This use can be really useful for multi-input forms. i.e: To avoid loosing what the <br />
-        user already filled if they accidentally navigate to other page or refresh it.
+      <span>
+        This use can be really useful for multi-input forms. i.e: To avoid loosing what the
+        <br>user already filled if they accidentally navigate to other page or refresh it.
       </span>
     </v-tooltip>
 
-    <v-card-text class="blue--text" v-on="on">
-      ⬆️ Try refreshing the page after changing it... ⬆️
-    </v-card-text>
+    <v-card-text class="blue--text" v-on="on">⬆️ Try refreshing the page after changing it... ⬆️</v-card-text>
   </v-flex>
 </template>
 
 <script>
-import { preference } from "vue-preferences"
+import { preference } from 'vue-preferences';
 
 export default {
   name: 'PersistantText',
   props: {
     on: String,
-
   },
   computed: {
-    myPersistentMessage: preference("persistedMessage"),
+    myPersistentMessage: preference('persistedMessage', { reactive: false }),
   },
   data() {
     return {
       show: null,
-    }
-  }
-}
+    };
+  },
+};
 </script>
 
 <style scoped>

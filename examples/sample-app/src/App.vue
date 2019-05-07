@@ -90,64 +90,67 @@
 </template>
 
 <script>
-import PersistantText from "./components/PersistantText.vue";
+import PersistantText from './components/PersistantText.vue';
+import { preference } from 'vue-preferences';
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
-    PersistantText
+    PersistantText,
+  },
+  computed: {
+    expandedContent: preference('expandedContent', { default: false }),
   },
   data() {
     return {
-      expandedContent: false,
       cards: [
         {
           title:
-            "The name Uruguay comes from the Uruguay River which means ‘river of the painted birds.",
-          src: require("./assets/images/naranjales-salto.jpg"),
+            'The name Uruguay comes from the Uruguay River which means ‘river of the painted birds.',
+          src: require('./assets/images/naranjales-salto.jpg'),
           caption:
             "The 'Uruguay' River starts in Brazil and ends in the Rio de la Plata Basin which forms the water border between Uruguay and Argentina. It measures about 1,838 kilometres (1,142 mi) in length.",
-          flex: 12
+          flex: 12,
         },
         {
           title:
-            "Over half of the country’s 3.3 million people live in the capital, Montevideo.",
-          src: require("./assets/images/pocitos-mdeo.jpg"),
+            'Over half of the country’s 3.3 million people live in the capital, Montevideo.',
+          src: require('./assets/images/pocitos-mdeo.jpg'),
           caption:
-            "Approximately 80% of the population is urban, living in towns or cities. Uruguay is splited in 19 departments where Montevideo is the largest in population and the smallest in territory. It has only 176,215 km2 (68,037 sq mi) and the 1.5% is covered by water.",
-          flex: 6
+            'Approximately 80% of the population is urban, living in towns or cities. Uruguay is splited in 19 departments where Montevideo is the largest in population and the smallest in territory. It has only 176,215 km2 (68,037 sq mi) and the 1.5% is covered by water.',
+          flex: 6,
         },
         {
-          title: "In Uruguay, cows outnumber people four to one.",
-          src: require("./assets/images/ganado-young.jpg"),
+          title: 'In Uruguay, cows outnumber people four to one.',
+          src: require('./assets/images/ganado-young.jpg'),
           caption:
             'Uruguay is sometimes described as "one big farm". Our famous "parillas" (grills) are a common desire all over the world. You just need to taste it once, to love it for ever.',
-          flex: 6
+          flex: 6,
         },
         {
-          title: "Uruguay has won the Soccer World Cup twice",
-          src: require("./assets/images/uy-soccer-team.jpg"),
+          title: 'Uruguay has won the Soccer World Cup twice',
+          src: require('./assets/images/uy-soccer-team.jpg'),
           caption:
             'Despite our size as a country and population, "la celeste" - as we call it, has won the Soccer World Cup twice: 1930 & 1950. We had organized and hold the first world cup and also invented the Olympic Lap.',
-          flex: 6
+          flex: 6,
         },
         {
           title:
-            "The highest point in Uruguay is Cerro Catedral at just 514m (1,684ft) above sea level.",
-          src: require("./assets/images/cerro-catedral.jpg"),
+            'The highest point in Uruguay is Cerro Catedral at just 514m (1,684ft) above sea level.',
+          src: require('./assets/images/cerro-catedral.jpg'),
           caption:
-            "We are a really flat country. Uruguay has flat plains on its eastern, southern, and western edges. The narrow Atlantic coastal plain is sandy and marshy, occasionally broken by shallow lagoons. The littorals of the Río de la Plata and the Río Uruguay are somewhat broader and merge more gradually into the hilly interior.",
-          flex: 6
-        }
-      ]
+            'We are a really flat country. Uruguay has flat plains on its eastern, southern, and western edges. The narrow Atlantic coastal plain is sandy and marshy, occasionally broken by shallow lagoons. The littorals of the Río de la Plata and the Río Uruguay are somewhat broader and merge more gradually into the hilly interior.',
+          flex: 6,
+        },
+      ],
     };
-  }
+  },
 };
 </script>
 
 <style scoped>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
