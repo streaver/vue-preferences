@@ -7676,10 +7676,10 @@ vue-loader@^15.7.0:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
-vue-preferences@^1.1.1:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/vue-preferences/-/vue-preferences-1.1.2.tgz#9a3879a3ca74ef4e570131af9f59997f33afe3cf"
-  integrity sha512-XuOhWcLBjx1TZl5ovG5jfZJiT6wy0iBzqpnIqZyuFy5BIS6Toprp3H36gwNWpprt7BwDrw40IklCiFYfSbaHNg==
+vue-preferences@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/vue-preferences/-/vue-preferences-2.0.0.tgz#e95bbe101bd7f1f4084f018fbe7621981db30352"
+  integrity sha512-kJXFuC3nzQYMKbz12dfA3cVesNiJing75HYv7jnEjG69yxnO4iVzD54pryJmk98DNeodbX7gehfucUsyTiyjfA==
 
 vue-style-loader@^4.1.0:
   version "4.1.2"
