@@ -17,5 +17,7 @@
 # This is because you probably want the production sample app to be stable
 # and not just build whatever is in the repository
 
-[context.production]
+[context.master]
+  base = "examples/sample-app"
+  publish = "dist"
   command = "yarn build"
