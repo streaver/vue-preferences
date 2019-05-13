@@ -83,6 +83,8 @@ function buildSetterFunction(name, key, opts, setupStatus) {
 }
 
 export function preference(name, opts = {}) {
+  console.log('Preference ', name, ' was created!');
+
   const options = { ...DEFAULT_OPTIONS, ...opts };
   const key = buildKey(name);
   const setupStatus = { isReactivitySetup: false };
