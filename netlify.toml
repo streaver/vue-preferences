@@ -1,0 +1,22 @@
+# By default all the branches/PRs build using the latest commit
+# available in the branch.
+
+[build]
+  base = "."
+  publish = "examples/sample-app/dist"
+  command = """
+    yarn build && \
+    npm link && \
+    cd examples/sample-app && \
+    yarn install && \
+    npm link vue-preferences && \
+    yarn build --mode development
+  """
+
+# The master branch just builds whatever is defined in the package.json
+# This is because you probably want the production sample app to be stable
+# and not just build whatever is in the repository
+
+[context.production]
+  base = "examples/sample-app/dist"
+  command = "yarn build"
