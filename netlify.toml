@@ -18,5 +18,4 @@
 # and not just build whatever is in the repository
 
 [context.production]
-  base = "examples/sample-app/dist"
   command = "yarn build"
