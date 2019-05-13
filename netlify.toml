@@ -19,5 +19,5 @@
 
 [context.master]
   base = "examples/sample-app"
-  publish = "dist"
+  publish = "examples/sample-app/dist"
   command = "yarn build"
