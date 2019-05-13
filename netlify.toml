@@ -1,0 +1,11 @@
+[build]
+  base = "."
+  publish = "examples/sample-app/dist"
+  command = """
+    yarn build && \
+    npm link && \
+    cd examples/sample-app && \
+    yarn install && \
+    npm link vue-preferences && \
+    yarn build --mode development
+  """
