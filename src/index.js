@@ -24,7 +24,7 @@ function mergeOptionsFor(name, globalOptions, specificOptions) {
 }
 
 function getPreference(key, options) {
-  const value = window.localStorage.getItem(key);
+  const value = globalOptions.storage.getItem(key);
 
   if (value === null) {
     return options.defaultValue;
@@ -38,7 +38,7 @@ function getPreference(key, options) {
 }
 
 function setPreference(key, value) {
-  window.localStorage.setItem(key, JSON.stringify(value));
+  globalOptions.storage.setItem(key, JSON.stringify(value));
 
   return value;
 }
@@ -103,7 +103,27 @@ export function mapPreferences(preferences) {
   return res;
 }
 
-function install(Vue) {
+function isValidStorage(storage) {
+  const hasValidGetItemFunction = typeof storage.getItem === 'function';
+  const hasValidSetItemFunction = typeof storage.setItem === 'function';
+
+  console.assert(
+    hasValidGetItemFunction,
+    "You must provide a 'getItem' function as part of the storage"
+  );
+  console.assert(
+    hasValidGetItemFunction,
+    "You must provide a 'setItem' function as part of the storage"
+  );
+
+  return hasValidGetItemFunction && hasValidSetItemFunction;
+}
+
+const globalOptions = {
+  storage: window.localStorage,
+};
+
+function install(Vue, options = {}) {
   Vue.prototype.$preferences = {};
 
   // We need to have one object to which we can dynamically add
@@ -117,6 +137,10 @@ function install(Vue) {
       };
     },
   });
+
+  if (options.storage && isValidStorage(options.storage)) {
+    globalOptions.storage = options.storage;
+  }
 }
 
 export default { install };
