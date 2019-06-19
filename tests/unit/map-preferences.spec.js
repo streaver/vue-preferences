@@ -1,9 +1,9 @@
 import setupVue from '../utils/setup-vue';
+import mapPreferences from '../../src/map-preferences';
 import {
-  mapPreferences,
   DEFAULT_STORAGE_PREFIX,
   DEFAULT_REACTIVE_PROPERTIES_PREFIX,
-} from '../../src/index';
+} from '../../src/constants';
 
 describe('VuePreferences#mapPreferences', () => {
   beforeEach(() => {
