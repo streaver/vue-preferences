@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/11605133/56131403-aec11f00-5f5d-11e9-8df7-ce60eda7dfa7.png" height="150px">
-  <p align="center">The coolest and easiest way to manage your user's preferences on the client side with local storage.<p>
+  <p align="center">The coolest and easiest way to manage your user's preferences on the client side with your preferred storage.<p>
 
   <p align="center">
     <a href="https://npmjs.org/package/vue-preferences">
@@ -27,7 +27,7 @@
 
 Many times happens that you want to handle some persistent state on your application but you find that doing an actual call to your back-end is like "killing a mosquito with a bazooka". For those scenarios, we decided to create the `vue-preferences` library.
 
-With `vue-preferences`, you can keep some state of your app on the client side by using [window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) under the hood. This way you ensure your UX keeps consistent while at the same time avoiding simple but annoying calls to your back-end. You can set some user preferences such as `theme color`, `users' default`, `hidden elements (after user opted-in)`, `table sorting`, and many others you can imagine with great simplicity.
+With `vue-preferences`, you can keep some state of your app on the client side by using any storage strategy you find suitable, as a default we use [window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) under the hood. This way you ensure your UX keeps consistent while at the same time avoiding simple but annoying calls to your back-end. You can set some user preferences such as `theme color`, `users' default`, `hidden elements (after user opted-in)`, `table sorting`, and many others you can imagine with great simplicity.
 
 ## Table of content
 
@@ -164,7 +164,7 @@ If at some point you need to know what is in your preference property, you just 
 // suppose you defined the following preference for saving the site's locale
 const locale = preference('locale', { defaultValue: 'en' });
 
-// obtains the value stored in localStorage under the key "locale" or returns default: "en"
+// obtains the value stored in the storage (by default localStorage) under the key "locale" or returns default: "en"
 console.log('Current locale is:', locale.get());
 
 // prints "Current locale is: en"
@@ -176,7 +176,7 @@ console.log('Current locale is:', locale.get());
 
 If you didn't define the preference as a computed property and instead did it as a regular variable, then it might happen that you want to handle it by your own.
 
-If that's the case, you don't have other alternative than using the API to set the new values (in fact you have another alternative: to change localStorage values with its API, but why would you do that? 🤭)
+If that's the case, you don't have other alternative than using the API to set the new values (in fact you have another alternative: to change the storage values with its API, but why would you do that? 🤭)
 
 How to do it?
 
@@ -186,7 +186,7 @@ const locale = preference('locale', { defaultValue: 'en' });
 
 locale.set('es');
 
-// obtains the value stored in localStorage under the key "locale" or returns default: "en"
+// obtains the value stored in the storage (by default localStorage) under the key "locale" or returns default: "en"
 console.log('Current locale is:', locale.get());
 
 // prints "Current locale is: es"
@@ -194,16 +194,36 @@ console.log('Current locale is:', locale.get());
 
 > This time the result is `es`, not `en`.
 
-### Options
+## Configuration Options
 
 🚀 In the near future, we will be supporting other custom options that will add even more power to the preferences you set. Stay tuned and support!
 
-For now, this is the list of available options:
+### Global library options
+
+The options defined here are global options that will affect **all** the properties in your project.
+
+| Option  | Default Value | Description |
+| ------------- | ------------- | ------------- |
+| `storage`  | `window.localStorage`  | Allows you to set up where the properties will be saved. By default we use `localStorage`, but you can use for example `sessionStorage` or any kind of storage. If you provide an object that has the same `getItem` and `setItem` API that `localStorage` has, then you can use that as a storage. |
+
+Example of global options usage:
+
+```javascript
+import VuePreferences from 'vue-preferences';
+
+Vue.use(VuePreferences, {
+  storage: window.sessionStorage
+});
+```
+
+### Properties
+
+This are the options available for the properties you define, some of them might interact with the global options defined in [Global library options](#global-library-options)
 
 | Option  | Default Value | Description |
 | ------------- | ------------- | ------------- |
 | `defaultValue`  | `undefined`  | Allows you to set up the preference with a custom default value. This allows you to ensures that even the first time the preference is read you will get something. |
-| `reactive`  | `true`  | By default preferences are reactive. This means that if you use the property in your template/code you can expect it to be observed and trigger re-renders, just like normal computed properties while at the same time the values get persisted to `localStorage`. If you disable this behavior the property will not trigger re-renders/re-computation of dependant code |
+| `reactive`  | `true`  | By default preferences are reactive. This means that if you use the property in your template/code you can expect it to be observed and trigger re-renders, just like normal computed properties while at the same time the values get persisted to `localStorage` (or your storage of choice). If you disable this behavior the property will not trigger re-renders/re-computation of dependant code |
 
 ### Notes
 
