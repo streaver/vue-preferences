@@ -1,9 +1,9 @@
 import setupVue from '../utils/setup-vue';
+import preference from '../../src/preference';
 import {
-  preference,
   DEFAULT_STORAGE_PREFIX,
   DEFAULT_REACTIVE_PROPERTIES_PREFIX,
-} from '../../src/index';
+} from '../../src/constants';
 
 describe('VuePreferences#preference', () => {
   const preferenceName = 'firstName';
