@@ -82,10 +82,10 @@ describe('StorageFactory', () => {
 
     describe('when a default option is given', () => {
       beforeEach(() => {
-        storage = StorageFactory.build({ default: 'abc' });
+        storage = StorageFactory.build({ defaultValue: 'abc' });
       });
 
-      it('sets up a NamespaceableStorage', () => {
+      it('sets up a DefaultableStorage', () => {
         expect(storage).toBeInstanceOf(DefaultableStorage);
         expect(storage.defaultValue).toEqual('abc');
       });

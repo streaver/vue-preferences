@@ -50,7 +50,7 @@ describe('mapPreferences', () => {
       const preferencesObject = {
         firstName: {},
         lastName: {
-          default: 'Sinclair',
+          defaultValue: 'Sinclair',
         },
       };
 
@@ -91,7 +91,7 @@ describe('mapPreferences', () => {
       it('obtains the default preference value from window.localStorage when executing the get function', () => {
         Object.keys(preferencesObject).forEach(preferenceName => {
           const preference = subject[preferenceName];
-          const defaultValue = preferencesObject[preferenceName].default || null;
+          const defaultValue = preferencesObject[preferenceName].defaultValue || null;
           const mockVue = setupVue(preference);
 
           expect(preference.get(preferenceName)).toBe(defaultValue);

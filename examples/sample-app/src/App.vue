@@ -99,7 +99,7 @@ export default {
     PersistantText,
   },
   computed: {
-    expandedContent: preference('expandedContent', { default: false }),
+    expandedContent: preference('expandedContent', { defaultValue: false }),
   },
   data() {
     return {

@@ -36,9 +36,9 @@ describe('preference', () => {
     });
   });
 
-  describe('using default option', () => {
+  describe('using defaultValue option', () => {
     beforeEach(() => {
-      subject = preference(preferenceName, { default: 'Alice' });
+      subject = preference(preferenceName, { defaultValue: 'Alice' });
 
       vueMock = setupVue(subject);
     });

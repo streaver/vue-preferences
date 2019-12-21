@@ -16,8 +16,8 @@ export default class StorageFactory {
       storage = new NamespaceableStorage(storage, options.namespace);
     }
 
-    if (options.default) {
-      storage = new DefaultableStorage(storage, options.default);
+    if (options.defaultValue) {
+      storage = new DefaultableStorage(storage, options.defaultValue);
     }
 
     return storage;
