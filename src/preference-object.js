@@ -15,7 +15,7 @@ export default class PreferenceObject {
     this.initialized = false;
   }
 
-  init(component) {
+  init(component = null) {
     if (!this.initialized) {
       this.options = {
         ...defaultGlobalOptions,
@@ -31,18 +31,30 @@ export default class PreferenceObject {
   }
 
   get() {
-    const reactiveObject = this.component[DEFAULT_REACTIVE_PROPERTIES_PREFIX];
     const value = this.storage.getItem(this.name);
-    const reactiveValue = reactiveObject[this.name];
 
-    return reactiveValue && this.options.reactive ? reactiveValue : value;
+    if (this._inVueContext()) {
+      const reactiveObject = this.component[DEFAULT_REACTIVE_PROPERTIES_PREFIX];
+      const reactiveValue = reactiveObject[this.name];
+
+      return reactiveValue && this.options.reactive ? reactiveValue : value;
+    }
+
+    return value;
   }
 
   set(value) {
-    const reactiveObject = this.component[DEFAULT_REACTIVE_PROPERTIES_PREFIX];
-
     this.value = value;
-    this.component.$set(reactiveObject, this.name, value);
+
+    if (this._inVueContext()) {
+      const reactiveObject = this.component[DEFAULT_REACTIVE_PROPERTIES_PREFIX];
+      this.component.$set(reactiveObject, this.name, value);
+    }
+
     this.storage.setItem(this.name, value);
+  }
+
+  _inVueContext() {
+    return this.component && this.component._isVue;
   }
 }

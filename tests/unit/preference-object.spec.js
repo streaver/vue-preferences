@@ -83,6 +83,7 @@ describe('PreferenceObject', () => {
           [DEFAULT_REACTIVE_PROPERTIES_PREFIX]: {
             somePreference: 123
           },
+          _isVue: true,
         }
 
         preferenceObject.init(component);
@@ -117,7 +118,8 @@ describe('PreferenceObject', () => {
 
       const component = {
         [DEFAULT_REACTIVE_PROPERTIES_PREFIX]: {},
-        $set: jest.fn()
+        $set: jest.fn(),
+        _isVue: true
       }
 
       preferenceObject.init(component);

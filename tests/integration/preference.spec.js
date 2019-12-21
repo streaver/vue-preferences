@@ -122,4 +122,16 @@ describe('preference', () => {
       expect(subject.get()).toMatchObject({ name: 'Alice', darkMode: false });
     });
   });
+
+  describe('programmatic usage', () => {
+    it('works outside the context of a vue component', () => {
+      const subject = preference('holaaa');
+
+      expect(subject.get()).toEqual(null);
+
+      subject.set(123);
+
+      expect(subject.get()).toEqual(123);
+    });
+  });
 });
