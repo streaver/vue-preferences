@@ -1,5 +1,6 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
-import { globalOptions } from '../../src/global-options';
+import { DEFAULT_REACTIVE_PROPERTIES_PREFIX } from '../../src/constants';
+import PreferenceObject from '../../src/preference-object';
 
 import install from '../../src/install';
 
@@ -8,14 +9,7 @@ describe('install', () => {
 
   beforeEach(() => {
     localVue = createLocalVue();
-    globalOptions.storage = window.localStorage;
     console.assert = jest.fn();
-  });
-
-  it('adds an empty object to the $preferences property in the Vue instance', () => {
-    install(localVue);
-
-    expect(localVue.prototype.$preferences).toEqual({});
   });
 
   it('adds a data mixin with the required properties for setting up reactive preferences', () => {
@@ -29,23 +23,16 @@ describe('install', () => {
     const wrapper = shallowMount(Paragraph, { localVue });
 
     expect(wrapper.vm.$data).toEqual({
-      'vp:tracked': {},
+      [DEFAULT_REACTIVE_PROPERTIES_PREFIX]: {},
     });
   });
 
-  it('it replaces the default storage with the provided storage when valid', () => {
-    const storage = { getItem: function() {}, setItem: function() {} };
+  it('saves the provided options in PreferenceObject.globalOptions', () => {
+    const storage = { getItem: jest.fn(), setItem: jest.fn() };
+    const namespace = 'namespace1';
 
-    install(localVue, { storage });
+    install(localVue, { storage, namespace });
 
-    expect(globalOptions.storage).toEqual(storage);
-  });
-
-  it('it ignores the provided storage when invalid', () => {
-    const storage = {};
-
-    install(localVue, { storage });
-
-    expect(globalOptions.storage).toBe(window.localStorage);
+    expect(PreferenceObject.globalOptions).toEqual({ storage, namespace });
   });
 });
