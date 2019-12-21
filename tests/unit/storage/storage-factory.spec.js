@@ -80,7 +80,7 @@ describe('StorageFactory', () => {
       });
     });
 
-    describe('when a default option is given', () => {
+    describe('when a defaultValue option is given', () => {
       beforeEach(() => {
         storage = StorageFactory.build({ defaultValue: 'abc' });
       });
