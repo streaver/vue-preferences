@@ -5,7 +5,7 @@ import VuePreferences from 'vue-preferences';
 import 'vuetify/dist/vuetify.min.css';
 
 Vue.use(Vuetify);
-Vue.use(VuePreferences);
+Vue.use(VuePreferences, { bla: true });
 
 Vue.config.productionTip = false;
 
