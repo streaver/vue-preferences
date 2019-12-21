@@ -4,7 +4,7 @@
       <v-card-text>
         <h1 class="text-md-center">Vue preferences sample</h1>
         <div class="source-code--container">
-          <img :src="require('./assets/images/GitHub-Mark-64px.png')" class="github">
+          <img :src="require('./assets/images/GitHub-Mark-64px.png')" class="github" />
           <a
             href="https://www.github.com/streaver/vue-preferences"
             target="_blank"
@@ -34,14 +34,14 @@
               <v-flex xs12 md6 align-end flexbox>
                 <div>
                   <span>A collection of interesting facts about Uruguay</span>
-                  <br>
+                  <br />
                   <span>📷 Punta del Este, Maldonado, Uruguay.</span>
-                  <br>
+                  <br />
                   <span class="grey--text">Photo by Ernesto Velázquez, Unsplash</span>
                 </div>
               </v-flex>
 
-              <PersistantText/>
+              <PersistantText />
             </v-layout>
 
             <v-card-actions>
@@ -99,7 +99,10 @@ export default {
     PersistantText,
   },
   computed: {
-    expandedContent: preference('expandedContent', { defaultValue: false }),
+    expandedContent: preference('expandedContent', {
+      defaultValue: false,
+      storage: window.sessionStorage,
+    }),
   },
   data() {
     return {
