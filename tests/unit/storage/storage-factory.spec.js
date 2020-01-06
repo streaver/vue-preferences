@@ -21,14 +21,14 @@ describe('StorageFactory', () => {
       });
 
       it('sets up window.localStorage as the underlying storage', () => {
-        expect(storage.underlyingStorage).toBeInstanceOf(BaseStorage);
-        expect(storage.underlyingStorage.underlyingStorage).toEqual(window.localStorage);
+        expect(storage._underlyingStorage).toBeInstanceOf(BaseStorage);
+        expect(storage._underlyingStorage._underlyingStorage).toEqual(window.localStorage);
       });
 
       it('sets up a SerializableStorage with the default options', () => {
         expect(storage).toBeInstanceOf(SerializableStorage);
-        expect(storage.serializer).not.toEqual(undefined);
-        expect(storage.deserializer).not.toEqual(undefined);
+        expect(storage._serializer).not.toEqual(undefined);
+        expect(storage._deserializer).not.toEqual(undefined);
       });
     });
 
@@ -38,8 +38,8 @@ describe('StorageFactory', () => {
       });
 
       it('sets up the provided storage as the underlying storage', () => {
-        expect(storage.underlyingStorage).toBeInstanceOf(BaseStorage);
-        expect(storage.underlyingStorage.underlyingStorage.id).toEqual(1);
+        expect(storage._underlyingStorage).toBeInstanceOf(BaseStorage);
+        expect(storage._underlyingStorage._underlyingStorage.id).toEqual(1);
       });
     });
 
@@ -52,7 +52,7 @@ describe('StorageFactory', () => {
 
       it('sets up the serializer on the SerializableStorage storage', () => {
         expect(storage).toBeInstanceOf(SerializableStorage);
-        expect(storage.serializer).toEqual(serializer);
+        expect(storage._serializer).toEqual(serializer);
       });
     });
 
@@ -65,7 +65,7 @@ describe('StorageFactory', () => {
 
       it('sets up the deserializer on the SerializableStorage storage', () => {
         expect(storage).toBeInstanceOf(SerializableStorage);
-        expect(storage.deserializer).toEqual(deserializer);
+        expect(storage._deserializer).toEqual(deserializer);
       });
     });
 
@@ -76,7 +76,7 @@ describe('StorageFactory', () => {
 
       it('sets up a NamespaceableStorage', () => {
         expect(storage).toBeInstanceOf(NamespaceableStorage);
-        expect(storage.namespace).toEqual('namespace1');
+        expect(storage._namespace).toEqual('namespace1');
       });
     });
 
@@ -87,7 +87,7 @@ describe('StorageFactory', () => {
 
       it('sets up a DefaultableStorage', () => {
         expect(storage).toBeInstanceOf(DefaultableStorage);
-        expect(storage.defaultValue).toEqual('abc');
+        expect(storage._defaultValue).toEqual('abc');
       });
     });
   });

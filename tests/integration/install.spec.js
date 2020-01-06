@@ -27,12 +27,12 @@ describe('install', () => {
     });
   });
 
-  it('saves the provided options in PreferenceObject.globalOptions', () => {
+  it('saves the provided options in PreferenceObject._globalOptions', () => {
     const storage = { getItem: jest.fn(), setItem: jest.fn() };
     const namespace = 'namespace1';
 
     install(localVue, { storage, namespace });
 
-    expect(PreferenceObject.globalOptions).toEqual({ storage, namespace });
+    expect(PreferenceObject._globalOptions).toEqual({ storage, namespace });
   });
 });

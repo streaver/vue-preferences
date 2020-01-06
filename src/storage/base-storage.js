@@ -4,15 +4,15 @@ export default class BaseStorage {
       throw new TypeError('Please provide a valid underlying storage object');
     }
 
-    this.underlyingStorage = underlyingStorage;
+    this._underlyingStorage = underlyingStorage;
   }
 
   getItem(key) {
-    return this.underlyingStorage.getItem(key);
+    return this._underlyingStorage.getItem(key);
   }
 
   setItem(key, value) {
-    return this.underlyingStorage.setItem(key, value);
+    return this._underlyingStorage.setItem(key, value);
   }
 
   static isValidUnderlyingStorage(storage) {

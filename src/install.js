@@ -16,7 +16,7 @@ function install(Vue, options = {}) {
     },
   });
 
-  PreferenceObject.globalOptions = options;
+  PreferenceObject._globalOptions = options;
 }
 
 export default install;

@@ -7,7 +7,7 @@ export default function preference(name, options = {}) {
     get() {
       const component = this;
 
-      preference.init(component);
+      preference.init(this);
 
       return preference.get();
     },
@@ -15,7 +15,7 @@ export default function preference(name, options = {}) {
     set(value) {
       const component = this;
 
-      preference.init(component);
+      preference.init(this);
 
       return preference.set(value);
     },

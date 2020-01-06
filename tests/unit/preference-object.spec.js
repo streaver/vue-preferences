@@ -12,12 +12,12 @@ describe('PreferenceObject', () => {
 
       const preferenceObject = new PreferenceObject('somePreference', options);
 
-      expect(preferenceObject.name).toEqual('somePreference');
-      expect(preferenceObject.options).toEqual(options);
-      expect(preferenceObject.value).toEqual(undefined);
-      expect(preferenceObject.component).toEqual(undefined);
-      expect(preferenceObject.storage).toEqual(undefined);
-      expect(preferenceObject.initialized).toEqual(false);
+      expect(preferenceObject._name).toEqual('somePreference');
+      expect(preferenceObject._options).toEqual(options);
+      expect(preferenceObject._value).toEqual(undefined);
+      expect(preferenceObject._component).toEqual(undefined);
+      expect(preferenceObject._storage).toEqual(undefined);
+      expect(preferenceObject._initialized).toEqual(false);
     });
   });
 
@@ -46,20 +46,20 @@ describe('PreferenceObject', () => {
 
       preferenceObject.init({});
 
-      expect(preferenceObject.options).toEqual({ reactive: true });
+      expect(preferenceObject._options).toEqual({ reactive: true });
     });
 
     it('merges the options to the globalOptions', () => {
       const globalOptions = { globalOption1: 'global1', globalOption2: 'global2' };
       const localOptions = { localOption: 'localOption', globalOption1: 'global1Override' };
 
-      PreferenceObject.globalOptions = globalOptions
+      PreferenceObject._globalOptions = globalOptions
 
       const preferenceObject = new PreferenceObject('somePreference', localOptions);
 
       preferenceObject.init({});
 
-      expect(preferenceObject.options).toEqual({ reactive: true, ...globalOptions, ...localOptions });
+      expect(preferenceObject._options).toEqual({ reactive: true, ...globalOptions, ...localOptions });
     });
 
     it('saves the component into the preference object', () => {
@@ -67,7 +67,7 @@ describe('PreferenceObject', () => {
 
       preferenceObject.init({});
 
-      expect(preferenceObject.component).toEqual({});
+      expect(preferenceObject._component).toEqual({});
     })
   });
 

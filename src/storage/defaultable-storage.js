@@ -4,13 +4,13 @@ export default class DefaultableStorage extends BaseStorage {
   constructor(underlyingStorage, defaultValue) {
     super(underlyingStorage);
 
-    this.defaultValue = defaultValue;
+    this._defaultValue = defaultValue;
   }
 
   getItem(key) {
     const value = super.getItem(key);
 
-    return value === null ? this.defaultValue : value;
+    return value === null ? this._defaultValue : value;
   }
 
   setItem(key, value) {

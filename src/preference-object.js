@@ -7,54 +7,54 @@ const defaultGlobalOptions = {
 
 export default class PreferenceObject {
   constructor(name, options) {
-    this.name = name;
-    this.options = options;
-    this.value = undefined;
-    this.component = undefined;
-    this.storage = undefined;
-    this.initialized = false;
+    this._name = name;
+    this._options = options;
+    this._value = undefined;
+    this._component = undefined;
+    this._storage = undefined;
+    this._initialized = false;
   }
 
   init(component = null) {
-    if (!this.initialized) {
-      this.options = {
+    if (!this._initialized) {
+      this._options = {
         ...defaultGlobalOptions,
-        ...PreferenceObject.globalOptions,
-        ...this.options
+        ...PreferenceObject._globalOptions,
+        ...this._options
       }
 
-      this.component = component;
-      this.storage = StorageFactory.build(this.options);
+      this._component = component;
+      this._storage = StorageFactory.build(this._options);
 
-      this.initialized = true;
+      this._initialized = true;
     }
   }
 
   get() {
-    const value = this.storage.getItem(this.name);
+    const value = this._storage.getItem(this._name);
 
     if (this._inVueContext()) {
-      const reactiveObject = this.component[DEFAULT_REACTIVE_PROPERTIES_PREFIX];
-      const reactiveValue = reactiveObject[this.name];
+      const reactiveObject = this._component[DEFAULT_REACTIVE_PROPERTIES_PREFIX];
+      const reactiveValue = reactiveObject[this._name];
 
-      return reactiveValue && this.options.reactive ? reactiveValue : value;
+      return reactiveValue && this._options.reactive ? reactiveValue : value;
     }
 
     return value;
   }
 
   set(value) {
-    this.value = value;
+    this._value = value;
 
     if (this._inVueContext()) {
-      const reactiveObject = this.component[DEFAULT_REACTIVE_PROPERTIES_PREFIX];
-      this.component.$set(reactiveObject, this.name, value);
+      const reactiveObject = this._component[DEFAULT_REACTIVE_PROPERTIES_PREFIX];
+      this._component.$set(reactiveObject, this._name, value);
     }
 
-    this.storage.setItem(this.name, value);
+    this._storage.setItem(this._name, value);
   }
 
   _inVueContext() {
-    return this.component && this.component._isVue;
+    return this._component && this._component._isVue;
   }
 }

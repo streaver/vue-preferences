@@ -6,7 +6,7 @@ export default class NamespaceableStorage extends BaseStorage {
   constructor(underlyingStorage, namespace) {
     super(underlyingStorage);
 
-    this.namespace = namespace;
+    this._namespace = namespace;
   }
 
   getItem(key) {
@@ -22,6 +22,6 @@ export default class NamespaceableStorage extends BaseStorage {
   }
 
   buildNamespacedKey(key) {
-    return Boolean(this.namespace) ? `${this.namespace}:${key}` : key;
+    return Boolean(this._namespace) ? `${this._namespace}:${key}` : key;
   }
 };

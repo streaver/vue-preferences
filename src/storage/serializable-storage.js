@@ -16,15 +16,15 @@ export default class SerializableStorage extends BaseStorage {
       }
     };
 
-    this.serializer = options.serializer || defaultSerializer;
-    this.deserializer = options.deserializer || defaultDeserializer;
+    this._serializer = options.serializer || defaultSerializer;
+    this._deserializer = options.deserializer || defaultDeserializer;
   }
 
   getItem(key) {
-    return this.deserializer(super.getItem(key));
+    return this._deserializer(super.getItem(key));
   }
 
   setItem(key, value) {
-    return super.setItem(key, this.serializer(value));
+    return super.setItem(key, this._serializer(value));
   }
 };
