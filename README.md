@@ -33,6 +33,7 @@ With `vue-preferences`, you can keep some state of your app on the client side b
 
 * [Installation](#installation)
 * [Usage](#usage)
+* [Options](#options)
 * [Contributing](#contributing)
 * [Credits](#credits)
 
@@ -170,7 +171,7 @@ console.log('Current locale is:', locale.get());
 // prints "Current locale is: en"
 ```
 
-> Keep in mind that if you defined your preference without a default value, and you haven't called the API to set any it, then the result of calling `get` will be `undefined`.
+> Keep in mind that if you defined your preference without a default value, and you haven't called the API to set any it, then the result of calling `get` will be `null`.
 
 #### Store data
 
@@ -194,17 +195,24 @@ console.log('Current locale is:', locale.get());
 
 > This time the result is `es`, not `en`.
 
-## Configuration Options
+## Options
+
+This are the options available for the properties you define, any option you define on a preference has precedence over any global option you have defined or any provided default.
+
+| Option  | Default Value | Description |
+| ------------- | ------------- | ------------- |
+| `storage`  | `window.localStorage`  | Allows you to set up where the properties will be saved. By default we use `localStorage`, but you can use for example `sessionStorage` or any kind of storage. If you provide an object that has the same `getItem` and `setItem` API that `localStorage` has, then you can use that as a storage. |
+| `defaultValue`  | `null`  | Allows you to set up the preference with a custom default value. This allows you to ensure that even the first time the preference is read you will get something. |
+| `reactive`  | `true`  | By default preferences are reactive. This means that if you use the property in your template/code you can expect it to be observed and trigger re-renders, just like normal computed properties while at the same time the values get persisted to `localStorage` (or your storage of choice). If you disable this behavior the property will not trigger re-renders/re-computation of dependant code |
+| `serializer`  | `JSON.stringify`  | The default serializer is `JSON.stringify`, this allows you to save all kinds of objects. You could for example use a CSV serializer.|
+| `deserializer`  | `JSON.parse`  | The default deserializer is `JSON.parse`, and if it cannot deserialize a value it will return the value raw from the storage.|
+| `namespace`  | `''`  | The default namespace is empty, which means that the properties will get saved and read from the storage with the name of the preference. For example of the preference name is `firstName`, it will get stored as `firstName`, but if you add the namespace `userData`, it will get saved as `userData:firstName`|
 
 🚀 In the near future, we will be supporting other custom options that will add even more power to the preferences you set. Stay tuned and support!
 
 ### Global library options
 
-The options defined here are global options that will affect **all** the properties in your project.
-
-| Option  | Default Value | Description |
-| ------------- | ------------- | ------------- |
-| `storage`  | `window.localStorage`  | Allows you to set up where the properties will be saved. By default we use `localStorage`, but you can use for example `sessionStorage` or any kind of storage. If you provide an object that has the same `getItem` and `setItem` API that `localStorage` has, then you can use that as a storage. |
+Options can be defined globally and will affect **all** the preferences in your project unless overridden by individual preferences.
 
 Example of global options usage:
 
@@ -212,18 +220,10 @@ Example of global options usage:
 import VuePreferences from 'vue-preferences';
 
 Vue.use(VuePreferences, {
-  storage: window.sessionStorage
+  storage: window.sessionStorage,
+  namespace: 'my-app'
 });
 ```
-
-### Properties
-
-This are the options available for the properties you define, some of them might interact with the global options defined in [Global library options](#global-library-options)
-
-| Option  | Default Value | Description |
-| ------------- | ------------- | ------------- |
-| `defaultValue`  | `undefined`  | Allows you to set up the preference with a custom default value. This allows you to ensures that even the first time the preference is read you will get something. |
-| `reactive`  | `true`  | By default preferences are reactive. This means that if you use the property in your template/code you can expect it to be observed and trigger re-renders, just like normal computed properties while at the same time the values get persisted to `localStorage` (or your storage of choice). If you disable this behavior the property will not trigger re-renders/re-computation of dependant code |
 
 ### Notes
 
