@@ -15,9 +15,14 @@ export default class BaseStorage {
     return this._underlyingStorage.setItem(key, value);
   }
 
+  removeItem(key) {
+    return this._underlyingStorage.removeItem(key);
+  }
+
   static isValidUnderlyingStorage(storage) {
     const hasValidGetItemFunction = typeof storage.getItem === 'function';
     const hasValidSetItemFunction = typeof storage.setItem === 'function';
+    const hasValidRemoveItemFunction = typeof storage.removeItem === 'function';
 
     console.assert(
       hasValidGetItemFunction,
@@ -27,7 +32,15 @@ export default class BaseStorage {
       hasValidSetItemFunction,
       "You must provide a 'setItem' function as part of the storage"
     );
+    console.assert(
+      hasValidRemoveItemFunction,
+      "You must provide a 'removeItem' function as part of the storage"
+    );
 
-    return hasValidGetItemFunction && hasValidSetItemFunction;
+    return [
+      hasValidGetItemFunction,
+      hasValidSetItemFunction,
+      hasValidRemoveItemFunction,
+    ].every(Boolean);
   }
 };

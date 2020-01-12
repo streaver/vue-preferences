@@ -21,6 +21,12 @@ export default class NamespaceableStorage extends BaseStorage {
     return super.setItem(namespacedKey, value);
   }
 
+  removeItem(key) {
+    const namespacedKey = this.buildNamespacedKey(key);
+
+    return super.removeItem(namespacedKey);
+  }
+
   buildNamespacedKey(key) {
     return Boolean(this._namespace) ? `${this._namespace}:${key}` : key;
   }

@@ -1,10 +1,11 @@
 import BaseStorage from '../../../src/storage/base-storage';
 
 describe('BaseStorage', () => {
-  const validStorage = { getItem: jest.fn(), setItem: jest.fn() };
-  const onlyGetStorage = { getItem: jest.fn() };
-  const onlySetStorage = { setItem: jest.fn() };
-  const noGetNoSetStorage = {};
+  const validStorage = { getItem: jest.fn(), setItem: jest.fn(), removeItem: jest.fn() };
+  const noSetStorage = { getItem: jest.fn(), removeItem: jest.fn() };
+  const noGetStorage = { setItem: jest.fn(), removeItem: jest.fn() };
+  const noRemoveStorage = { setItem: jest.fn(), getItem: jest.fn() };
+  const invalidStorage = {};
 
   beforeEach(() => {
     console.assert = jest.fn();
@@ -17,7 +18,7 @@ describe('BaseStorage', () => {
   describe('constructor', () => {
     it('throws an error when invalid storage is provided', () => {
       expect(
-        () => new BaseStorage(noGetNoSetStorage)
+        () => new BaseStorage(invalidStorage)
       ).toThrowError(new TypeError('Please provide a valid underlying storage object'));
     });
 
@@ -48,13 +49,27 @@ describe('BaseStorage', () => {
     });
   });
 
+  describe('#removeItem', () => {
+    it('calls the underlying storage with the same key', () => {
+      const baseStorage = new BaseStorage(validStorage);
+
+      baseStorage.removeItem('someKey');
+
+      expect(validStorage.removeItem).toHaveBeenCalledWith('someKey');
+    });
+  });
+
   describe('.isValidUnderlyingStorage', () => {
     it('returns false when provided storage does not include a getItem function', () => {
-      expect(BaseStorage.isValidUnderlyingStorage(onlySetStorage)).toBe(false);
+      expect(BaseStorage.isValidUnderlyingStorage(noGetStorage)).toBe(false);
     });
 
     it('returns false when provided storage does not include a setItem function', () => {
-      expect(BaseStorage.isValidUnderlyingStorage(onlyGetStorage)).toBe(false);
+      expect(BaseStorage.isValidUnderlyingStorage(noSetStorage)).toBe(false);
+    });
+
+    it('returns false when provided storage does not include a removeItem function', () => {
+      expect(BaseStorage.isValidUnderlyingStorage(noRemoveStorage)).toBe(false);
     });
 
     it('returns true when provided storage includes a setItem and getItem function', () => {
@@ -62,7 +77,7 @@ describe('BaseStorage', () => {
     });
 
     it('console asserts that storage needs getItem', () => {
-      BaseStorage.isValidUnderlyingStorage(onlySetStorage);
+      BaseStorage.isValidUnderlyingStorage(noGetStorage);
 
       expect(console.assert).toHaveBeenCalledWith(
         false,
@@ -71,11 +86,20 @@ describe('BaseStorage', () => {
     });
 
     it('console asserts that storage needs setItem', () => {
-      BaseStorage.isValidUnderlyingStorage(onlyGetStorage);
+      BaseStorage.isValidUnderlyingStorage(noSetStorage);
 
       expect(console.assert).toHaveBeenCalledWith(
         false,
         "You must provide a 'setItem' function as part of the storage"
+      );
+    });
+
+    it('console asserts that storage needs removeItem', () => {
+      BaseStorage.isValidUnderlyingStorage(noRemoveStorage);
+
+      expect(console.assert).toHaveBeenCalledWith(
+        false,
+        "You must provide a 'removeItem' function as part of the storage"
       );
     });
   });

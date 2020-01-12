@@ -12,8 +12,4 @@ export default class DefaultableStorage extends BaseStorage {
 
     return value === null ? this._defaultValue : value;
   }
-
-  setItem(key, value) {
-    return super.setItem(key, value);
-  }
 };

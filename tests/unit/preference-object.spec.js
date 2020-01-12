@@ -76,7 +76,7 @@ describe('PreferenceObject', () => {
       it('returns the value from the component if reactive', () => {
         const preferenceObject = new PreferenceObject('somePreference', {
           reactive: true,
-          storage: { getItem: jest.fn().mockReturnValue('abc'), setItem: jest.fn() },
+          storage: { getItem: jest.fn().mockReturnValue('abc'), setItem: jest.fn(), removeItem: jest.fn() },
         });
 
         const component = {
@@ -94,7 +94,7 @@ describe('PreferenceObject', () => {
       it('returns the value from the storage if not reactive', () => {
         const preferenceObject = new PreferenceObject('somePreference', {
           reactive: false,
-          storage: { getItem: jest.fn().mockReturnValue('abc'), setItem: jest.fn() },
+          storage: { getItem: jest.fn().mockReturnValue('abc'), setItem: jest.fn(), removeItem: jest.fn() },
         });
 
         const component = {
@@ -113,7 +113,7 @@ describe('PreferenceObject', () => {
   describe('#set', () => {
     it('sets the value into the component', () => {
       const preferenceObject = new PreferenceObject('somePreference', {
-        storage: { getItem: jest.fn(), setItem: jest.fn() },
+        storage: { getItem: jest.fn(), setItem: jest.fn(), removeItem: jest.fn() },
       });
 
       const component = {
@@ -129,7 +129,7 @@ describe('PreferenceObject', () => {
     });
 
     it('sets the value into the storage', () => {
-      const storage = { getItem: jest.fn(), setItem: jest.fn() };
+      const storage = { getItem: jest.fn(), setItem: jest.fn(), removeItem: jest.fn() };
 
       const preferenceObject = new PreferenceObject('somePreference', { storage });
 
