@@ -8,10 +8,17 @@
           class="persistant-text"
           v-on="on"
         ></v-text-field>
+
+        <v-text-field
+          v-model="myTemporaryMessage"
+          label="Write your temporary text here, wait 5 seconds and reload, it will be gone..."
+          class="temporary-text"
+          v-on="on"
+        ></v-text-field>
       </template>
       <span>
         This use can be really useful for multi-input forms. i.e: To avoid loosing what the
-        <br>user already filled if they accidentally navigate to other page or refresh it.
+        <br />user already filled if they accidentally navigate to other page or refresh it.
       </span>
     </v-tooltip>
 
@@ -29,6 +36,10 @@ export default {
   },
   computed: {
     myPersistentMessage: preference('persistedMessage', { reactive: false }),
+    myTemporaryMessage: preference('temporaryMessage', {
+      reactive: false,
+      ttl: 5,
+    }),
   },
   data() {
     return {
