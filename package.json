@@ -34,6 +34,7 @@
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-import": "^2.16.0",
     "jest": "^24.7.1",
+    "jest-date-mock": "^1.0.8",
     "jest-when": "^2.7.0",
     "microbundle": "^0.11.0",
     "prettier": "1.19.1",
@@ -42,5 +43,10 @@
   },
   "mangle": {
     "regex": "^(?!_isVue)(_)"
+  },
+  "jest": {
+    "setupFiles": [
+      "jest-date-mock"
+    ]
   }
 }
