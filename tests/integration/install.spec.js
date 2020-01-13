@@ -1,8 +1,7 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
-import { DEFAULT_REACTIVE_PROPERTIES_PREFIX } from '../../src/constants';
-import PreferenceObject from '../../src/preference-object';
-
-import install from '../../src/install';
+import { DEFAULT_REACTIVE_PROPERTIES_PREFIX } from '@vue-preferences/constants';
+import PreferenceObject from '@vue-preferences/preference-object';
+import install from '@vue-preferences/install';
 
 describe('install', () => {
   let localVue;

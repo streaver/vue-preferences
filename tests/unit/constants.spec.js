@@ -1,4 +1,4 @@
-import * as constants from '../../src/constants';
+import * as constants from '@vue-preferences/constants';
 
 describe('constants', () => {
   it('exports DEFAULT_REACTIVE_PROPERTIES_PREFIX', () => {

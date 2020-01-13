@@ -1,6 +1,6 @@
-import PreferenceObject from '../../src/preference-object';
-import StorageFactory from '../../src/storage/storage-factory';
-import { DEFAULT_REACTIVE_PROPERTIES_PREFIX } from '../../src/constants';
+import PreferenceObject from '@vue-preferences/preference-object';
+import StorageFactory from '@vue-preferences/storage/storage-factory';
+import { DEFAULT_REACTIVE_PROPERTIES_PREFIX } from '@vue-preferences/constants';
 
 describe('PreferenceObject', () => {
   describe('#constructor', () => {

@@ -1,9 +1,9 @@
-import StorageFactory from '../../../src/storage/storage-factory';
-import BaseStorage from '../../../src/storage/base-storage';
-import DefaultableStorage from '../../../src/storage/defaultable-storage';
-import NamespaceableStorage from '../../../src/storage/namespaceable-storage';
-import SerializableStorage from '../../../src/storage/serializable-storage';
-import ExpirableStorage from '../../../src/storage/expirable-storage';
+import StorageFactory from '@vue-preferences/storage/storage-factory';
+import BaseStorage from '@vue-preferences/storage/base-storage';
+import DefaultableStorage from '@vue-preferences/storage/defaultable-storage';
+import NamespaceableStorage from '@vue-preferences/storage/namespaceable-storage';
+import SerializableStorage from '@vue-preferences/storage/serializable-storage';
+import ExpirableStorage from '@vue-preferences/storage/expirable-storage';
 
 describe('StorageFactory', () => {
   let underlyingStorage;

@@ -1,5 +1,5 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
-import VuePreferences from '../../src/index';
+import VuePreferences from '@vue-preferences/index';
 
 export default function setupVue(subject) {
   const localVue = createLocalVue();

@@ -1,7 +1,7 @@
 import { when } from 'jest-when'
 import { advanceBy, advanceTo, clear } from 'jest-date-mock';
 
-import ExpirableStorage from '../../../src/storage/expirable-storage';
+import ExpirableStorage from '@vue-preferences/storage/expirable-storage';
 
 describe('ExpirableStorage', () => {
   let validStorage;

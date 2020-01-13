@@ -1,4 +1,4 @@
-import SerializableStorage from '../../../src/storage/serializable-storage';
+import SerializableStorage from '@vue-preferences/storage/serializable-storage';
 
 describe('SerializableStorage', () => {
   let underlyingStorage;

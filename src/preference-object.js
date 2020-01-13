@@ -1,5 +1,5 @@
-import StorageFactory from './storage/storage-factory';
-import { DEFAULT_REACTIVE_PROPERTIES_PREFIX } from './constants';
+import StorageFactory from '@vue-preferences/storage/storage-factory';
+import { DEFAULT_REACTIVE_PROPERTIES_PREFIX } from '@vue-preferences/constants';
 
 const defaultGlobalOptions = {
   reactive: true,

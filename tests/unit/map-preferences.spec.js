@@ -1,4 +1,4 @@
-import mapPreferences from '../../src/map-preferences';
+import mapPreferences from '@vue-preferences/map-preferences';
 
 describe('mapPreferences', () => {
   describe('when called with an array of names', () => {

@@ -1,7 +1,7 @@
-import VuePreferences, { preference, mapPreferences } from '../../src/index';
-import install from '../../src/install';
-import preferenceExport from '../../src/preference';
-import mapPreferencesExport from '../../src/map-preferences';
+import VuePreferences, { preference, mapPreferences } from '@vue-preferences/index';
+import install from '@vue-preferences/install';
+import preferenceExport from '@vue-preferences/preference';
+import mapPreferencesExport from '@vue-preferences/map-preferences';
 
 describe('VuePreferences', () => {
   it('exports the install function', () => {

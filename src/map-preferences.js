@@ -1,4 +1,4 @@
-import preference from './preference';
+import preference from '@vue-preferences/preference';
 
 function normalizeMap(map) {
   return Array.isArray(map)

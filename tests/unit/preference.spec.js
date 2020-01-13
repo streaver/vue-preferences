@@ -1,4 +1,4 @@
-import preference from '../../src/preference';
+import preference from '@vue-preferences/preference';
 
 describe('preference', () => {
   it('returns a computed property (object with get and set methods)', () => {
