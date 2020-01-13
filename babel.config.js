@@ -9,4 +9,12 @@ module.exports = {
       },
     ],
   ],
+  "plugins": [
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "@vue-preferences": "./src",
+      }
+    }]
+  ]
 };
