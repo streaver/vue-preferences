@@ -1,6 +1,6 @@
 {
   "name": "vue-preferences",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "The coolest and easiest way to manage your user's preferences through localStorage and no back-end calls at all.",
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
