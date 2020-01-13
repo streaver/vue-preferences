@@ -207,8 +207,10 @@ This are the options available for the properties you define, any option you def
 | `serializer`  | `JSON.stringify`  | The default serializer is `JSON.stringify`, this allows you to save all kinds of objects. You could for example use a CSV serializer.|
 | `deserializer`  | `JSON.parse`  | The default deserializer is `JSON.parse`, and if it cannot deserialize a value it will return the value raw from the storage.|
 | `namespace`  | `''`  | The default namespace is empty, which means that the properties will get saved and read from the storage with the name of the preference. For example of the preference name is `firstName`, it will get stored as `firstName`, but if you add the namespace `userData`, it will get saved as `userData:firstName`|
+| `ttl`  | `infinite`  | The Time-to-Live of a preference, the time in seconds after the preference creation/update at which a preference - *if found on the storage* - will be ignored and destroyed when tried to be read.|
+| `expiration`  | `infinite`  | A Date or function (returning a Date) at which the preference will be considered expired. This behaves like the `ttl` option.|
 
-🚀 In the near future, we will be supporting other custom options that will add even more power to the preferences you set. Stay tuned and support!
+🚀 In the future, we will be supporting other custom options that will add even more power to the preferences you set. Stay tuned and support!
 
 ### Global library options
 

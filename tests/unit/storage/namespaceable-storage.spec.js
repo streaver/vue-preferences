@@ -9,7 +9,7 @@ describe('NamespaceableStorage', () => {
   let namespaceableStorage3;
 
   beforeEach(() => {
-    validStorage = { getItem: jest.fn(), setItem: jest.fn() };
+    validStorage = { getItem: jest.fn(), setItem: jest.fn(), removeItem: jest.fn() };
 
     when(validStorage.getItem)
       .calledWith('namespace1:someKey').mockReturnValue('value1')
@@ -38,6 +38,18 @@ describe('NamespaceableStorage', () => {
       expect(validStorage.setItem).toHaveBeenCalledWith('namespace1:someKey', 'value1');
       expect(validStorage.setItem).toHaveBeenCalledWith('namespace2:someKey', 'value2');
       expect(validStorage.setItem).toHaveBeenCalledWith('someKey', 'value3');
+    });
+  });
+
+  describe('#removeItem', () => {
+    it('calls the underlying storage with the namespaced key', () => {
+      namespaceableStorage1.removeItem('someKey');
+      namespaceableStorage2.removeItem('someKey');
+      namespaceableStorage3.removeItem('someKey');
+
+      expect(validStorage.removeItem).toHaveBeenCalledWith('namespace1:someKey');
+      expect(validStorage.removeItem).toHaveBeenCalledWith('namespace2:someKey');
+      expect(validStorage.removeItem).toHaveBeenCalledWith('someKey');
     });
   });
 });

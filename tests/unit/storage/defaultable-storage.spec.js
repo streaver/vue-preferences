@@ -5,7 +5,7 @@ describe('DefaultableStorage', () => {
   let defaultableStorage;
 
   beforeEach(() => {
-    validStorage = { getItem: jest.fn().mockReturnValue(null), setItem: jest.fn() };
+    validStorage = { getItem: jest.fn().mockReturnValue(null), setItem: jest.fn(), removeItem: jest.fn() };
     defaultableStorage = new DefaultableStorage(validStorage, 'default value');
   });
 

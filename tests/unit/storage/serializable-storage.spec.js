@@ -5,7 +5,7 @@ describe('SerializableStorage', () => {
   let serializableStorage;
 
   beforeEach(() => {
-    underlyingStorage = { getItem: jest.fn(), setItem: jest.fn() };
+    underlyingStorage = { getItem: jest.fn(), setItem: jest.fn(), removeItem: jest.fn() };
   });
 
   describe('#getItem', () => {
