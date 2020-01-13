@@ -1,6 +1,6 @@
 import { when } from 'jest-when'
 
-import NamespaceableStorage from '../../../src/storage/namespaceable-storage';
+import NamespaceableStorage from '@vue-preferences/storage/namespaceable-storage';
 
 describe('NamespaceableStorage', () => {
   let validStorage;

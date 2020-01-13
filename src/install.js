@@ -1,5 +1,5 @@
-import PreferenceObject from './preference-object';
-import { DEFAULT_REACTIVE_PROPERTIES_PREFIX } from './constants';
+import PreferenceObject from '@vue-preferences/preference-object';
+import { DEFAULT_REACTIVE_PROPERTIES_PREFIX } from '@vue-preferences/constants';
 
 function install(Vue, options = {}) {
   // We need to have one object to which we can dynamically add

@@ -1,4 +1,4 @@
-import PreferenceObject from './preference-object'
+import PreferenceObject from '@vue-preferences/preference-object'
 
 export default function preference(name, options = {}) {
   const preference = new PreferenceObject(name, options);

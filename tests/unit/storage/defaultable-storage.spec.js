@@ -1,4 +1,4 @@
-import DefaultableStorage from '../../../src/storage/defaultable-storage';
+import DefaultableStorage from '@vue-preferences/storage/defaultable-storage';
 
 describe('DefaultableStorage', () => {
   let validStorage;

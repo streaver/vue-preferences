@@ -1,5 +1,5 @@
 import setupVue from '../utils/setup-vue';
-import preference from '../../src/preference';
+import preference from '@vue-preferences/preference';
 
 describe('preference', () => {
   const preferenceName = 'firstName';

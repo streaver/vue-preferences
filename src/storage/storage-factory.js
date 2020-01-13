@@ -1,8 +1,8 @@
-import BaseStorage from './base-storage';
-import DefaultableStorage from './defaultable-storage';
-import NamespaceableStorage from './namespaceable-storage';
-import SerializableStorage from './serializable-storage';
-import ExpirableStorage from './expirable-storage';
+import BaseStorage from '@vue-preferences/storage/base-storage';
+import DefaultableStorage from '@vue-preferences/storage/defaultable-storage';
+import NamespaceableStorage from '@vue-preferences/storage/namespaceable-storage';
+import SerializableStorage from '@vue-preferences/storage/serializable-storage';
+import ExpirableStorage from '@vue-preferences/storage/expirable-storage';
 
 export default class StorageFactory {
   static build(options = {}) {

@@ -1,4 +1,4 @@
-import BaseStorage from '../../../src/storage/base-storage';
+import BaseStorage from '@vue-preferences/storage/base-storage';
 
 describe('BaseStorage', () => {
   const validStorage = { getItem: jest.fn(), setItem: jest.fn(), removeItem: jest.fn() };

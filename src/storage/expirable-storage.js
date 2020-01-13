@@ -1,4 +1,4 @@
-import BaseStorage from './base-storage';
+import BaseStorage from '@vue-preferences/storage/base-storage';
 
 export default class ExpirableStorage extends BaseStorage {
   constructor(underlyingStorage, options = {}) {
