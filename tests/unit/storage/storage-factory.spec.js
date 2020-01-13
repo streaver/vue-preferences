@@ -3,6 +3,7 @@ import BaseStorage from '../../../src/storage/base-storage';
 import DefaultableStorage from '../../../src/storage/defaultable-storage';
 import NamespaceableStorage from '../../../src/storage/namespaceable-storage';
 import SerializableStorage from '../../../src/storage/serializable-storage';
+import ExpirableStorage from '../../../src/storage/expirable-storage';
 
 describe('StorageFactory', () => {
   let underlyingStorage;
@@ -88,6 +89,30 @@ describe('StorageFactory', () => {
       it('sets up a DefaultableStorage', () => {
         expect(storage).toBeInstanceOf(DefaultableStorage);
         expect(storage._defaultValue).toEqual('abc');
+      });
+    });
+
+    describe('when a ttl option is given', () => {
+      beforeEach(() => {
+        storage = StorageFactory.build({ ttl: 5 });
+      });
+
+      it('sets up a ExpirableStorage', () => {
+        expect(storage).toBeInstanceOf(ExpirableStorage);
+        expect(storage._ttl).toEqual(5);
+      });
+    });
+
+    describe('when a expiration option is given', () => {
+      const expiration = new Date();
+
+      beforeEach(() => {
+        storage = StorageFactory.build({ expiration });
+      });
+
+      it('sets up a ExpirableStorage', () => {
+        expect(storage).toBeInstanceOf(ExpirableStorage);
+        expect(storage._expiration).toEqual(expiration);
       });
     });
   });
