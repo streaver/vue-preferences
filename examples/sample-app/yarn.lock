@@ -8169,10 +8169,10 @@ vue@^2.6.11:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
 
-vuetify@^2.2.4:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.2.4.tgz#3f82cb1694a306aac7c88bda815ad812df555bf9"
-  integrity sha512-jhSdCeatWgHrY4Bb2FTi1sFfGDrVHLmkvI7pkG9FEF9TmZ+Qq7Ts85XAft9ucwU8ybB5nDmN6s+oeHJgvL+4tA==
+vuetify@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.2.5.tgz#894b2f0d8a1ced2477d7b665c5a8eb3c59c735b6"
+  integrity sha512-TYO0j9a2ma5aBzfTQqNkMAPPewh+gqacWSohGAT7w/GTm7fQDr83nsavxy7XBOQZ2X3c6jINaf+AlfJzI4FRDA==
 
 watchpack@^1.6.0:
   version "1.6.0"
