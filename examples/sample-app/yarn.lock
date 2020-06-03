@@ -8532,10 +8532,10 @@ vue@^2.6.11:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
 
-vuetify@^2.2.30:
-  version "2.2.30"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.2.30.tgz#976329c52b57d5cf360bd983636541b55ae80044"
-  integrity sha512-hCVzhXXBT91wqM+K8gBVmrHtiLMhk2EvkwpHNq5eHDJVbJYsUGPaUbMZHnmnvFnhegm6GyAnd9mu7pst2Mn1zQ==
+vuetify@^2.2.31:
+  version "2.2.31"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.2.31.tgz#4bfae969738e0a12a1138f014010a97cdbcd7674"
+  integrity sha512-Ad9NgJr6S7iOd9oMtzOfswEQG4dmVOWaAMSk+3T5oSveVBiSWVLG5F0jVHL9Pe8VblcT4L4EXsTldGT9P3BzLA==
 
 watchpack@^1.6.0:
   version "1.6.0"
