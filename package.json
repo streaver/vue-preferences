@@ -38,7 +38,7 @@
     "jest-date-mock": "^1.0.8",
     "jest-when": "^2.7.0",
     "microbundle": "^0.12.3",
-    "prettier": "1.19.1",
+    "prettier": "2.1.2",
     "vue": "^2.6.10",
     "vue-template-compiler": "^2.6.10"
   },
