@@ -8854,10 +8854,10 @@ vue@^2.6.12:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
   integrity sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg==
 
-vuetify@^2.5.1:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.5.1.tgz#c7206662aceefd830acfd34abc293354796d240d"
-  integrity sha512-L7bn8yVMXbt1QeTGaLTeyKE/tvhRUtGm5aQdCzUGu6lsGgEm7H707I4fjHftGNGNmmrUr3pmjpVrtqx65BMpUw==
+vuetify@^2.5.3:
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.5.3.tgz#9d703414a736879673c94550035adc177a6ca394"
+  integrity sha512-c0oX063PzWrIV29Mi7Pyi63OcF0FlCDJcgMvu0woTt4GL4yVmNQMh5hyKS5NEwlsS66HcjKJERMoY0JJc1bYGA==
 
 watchpack@^1.6.0:
   version "1.6.0"
