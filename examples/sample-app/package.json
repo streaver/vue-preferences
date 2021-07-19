@@ -20,7 +20,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^7.29.0",
     "eslint-plugin-vue": "^7.14.0",
-    "sass": "^1.35.1",
+    "sass": "^1.35.2",
     "sass-loader": "^12.1.0",
     "vue-template-compiler": "^2.6.12"
   },
