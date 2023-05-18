@@ -55,6 +55,6 @@ export default class PreferenceObject {
   }
 
   _inVueContext() {
-    return this._component && this._component._isVue;
+    return this._component && (this._component._isVue || this._component.__isVue);
   }
 }
